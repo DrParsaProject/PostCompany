@@ -36,7 +36,7 @@ namespace PostCompany.Controllers
         // GET api/Employee/5
         public EmployeeProfileReport GetEmployee(int id)
 		{
-			if (!Authorize.hasRole(EmployeeRole.Manager))
+			if (!Authorize.hasRole(EmployeeRole.Manager) && Authentication.GetCurrnetUserId() != id)
 				throw new HttpResponseException(HttpStatusCode.MethodNotAllowed);
             
 			Employee employee = db.Employees.Find(id);
@@ -49,7 +49,7 @@ namespace PostCompany.Controllers
         // PUT api/Employee/5
         public HttpResponseMessage PutEmployee(int id, EditEmployeeForm form)
 		{
-			if (!Authorize.hasRole(EmployeeRole.Manager))
+			if (!Authorize.hasRole(EmployeeRole.Manager) && Authentication.GetCurrnetUserId() != id)
 				throw new HttpResponseException(HttpStatusCode.MethodNotAllowed);
 
 			Employee emp = db.Employees.Find(id);
@@ -85,6 +85,9 @@ namespace PostCompany.Controllers
         {
 			if (!Authorize.hasRole(EmployeeRole.Manager))
 				throw new HttpResponseException(HttpStatusCode.MethodNotAllowed);
+
+			if (form.Role == EmployeeRole.Manager)
+				throw new HttpResponseException(HttpStatusCode.NotAcceptable);
 
 			Employee employee = new Employee();
 			employee.Username = form.Username;
