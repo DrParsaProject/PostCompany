@@ -163,6 +163,7 @@
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\EmployeeLoginController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Forms\EditEmployeeForm.cs" />
     <Compile Include="Forms\LoginForm.cs" />
     <Compile Include="Forms\RegisterEmployeeForm.cs" />
     <Compile Include="Global.asax.cs">

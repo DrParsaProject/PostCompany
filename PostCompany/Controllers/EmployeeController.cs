@@ -41,33 +41,34 @@ namespace PostCompany.Controllers
         }
 
         // PUT api/Employee/5
-        public HttpResponseMessage PutEmployee(int id, Employee employee)
+        public HttpResponseMessage PutEmployee(int id, EditEmployeeForm form)
 		{
 			if (!Authorize.hasRole(EmployeeRole.Manager))
 				return Request.CreateResponse(HttpStatusCode.MethodNotAllowed);
 
-            if (!ModelState.IsValid)
-            {
-                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
-            }
+			Employee emp = db.Employees.Find(id);
+			if (form.Name != null)
+				emp.Name = form.Name;
+			if (form.Role != EmployeeRole.Manager)
+				emp.Role = form.Role;
+			if (form.OldPassword != null && form.NewPassword != null)
+				if (Security.VerifyMd5Hash(form.OldPassword, emp.Password))
+					emp.Password = Security.GetMd5Hash(form.NewPassword);
+				else
+					return Request.CreateResponse(HttpStatusCode.NotAcceptable);
 
-            if (id != employee.Id)
-            {
-                return Request.CreateResponse(HttpStatusCode.BadRequest);
-            }
+			db.Entry(emp).State = EntityState.Modified;
 
-            db.Entry(employee).State = EntityState.Modified;
+			try
+			{
+				db.SaveChanges();
+			}
+			catch (DbUpdateConcurrencyException ex)
+			{
+				return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
+			}
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException ex)
-            {
-                return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
-            }
-
-            return Request.CreateResponse(HttpStatusCode.OK);
+			return Request.CreateResponse(HttpStatusCode.OK);
         }
 
         // POST api/Employee
