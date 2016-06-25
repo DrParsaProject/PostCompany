@@ -18,5 +18,11 @@ namespace PostCompany.Utils
 				return false;
 			return true;
 		}
+
+		public static bool isCurrentUser(int id, UserType type)
+		{
+			return id == Authentication.GetCurrnetUserId() && 
+				   type == Authentication.GetCurrnetUserType();
+		}
 	}
 }
