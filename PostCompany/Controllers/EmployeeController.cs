@@ -20,36 +20,36 @@ namespace PostCompany.Controllers
         private PostCompanyContext db = new PostCompanyContext();
 
         // GET api/Employee
-		public List<EmployeeProfileReport> GetEmployees()
+		public List<EmployeeProfileOForm> GetEmployees()
 		{
 			if (!Authorize.hasRole(EmployeeRole.Manager))
 				throw new HttpResponseException(HttpStatusCode.MethodNotAllowed);
 
 			List<Employee> list = db.Employees.ToList();
-			List<EmployeeProfileReport> res = new List<EmployeeProfileReport>();
+			List<EmployeeProfileOForm> res = new List<EmployeeProfileOForm>();
 			foreach (Employee e in list)
-				res.Add(new EmployeeProfileReport(e));
+				res.Add(new EmployeeProfileOForm(e));
 
 			return res;
         }
 
         // GET api/Employee/5
-        public EmployeeProfileReport GetEmployee(int id)
+        public EmployeeProfileOForm GetEmployee(int id)
 		{
-			if (!Authorize.hasRole(EmployeeRole.Manager) && Authentication.GetCurrnetUserId() != id)
+			if (!Authorize.hasRole(EmployeeRole.Manager) && !Authorize.isCurrentUser(id, UserType.Employee))
 				throw new HttpResponseException(HttpStatusCode.MethodNotAllowed);
             
 			Employee employee = db.Employees.Find(id);
             if (employee == null)
                 throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.NotFound));
 
-			return new EmployeeProfileReport(employee);
+			return new EmployeeProfileOForm(employee);
         }
 
         // PUT api/Employee/5
-        public HttpResponseMessage PutEmployee(int id, EditEmployeeForm form)
+        public HttpResponseMessage PutEmployee(int id, EditEmployeeIForm form)
 		{
-			if (!Authorize.hasRole(EmployeeRole.Manager) && Authentication.GetCurrnetUserId() != id)
+			if (!Authorize.hasRole(EmployeeRole.Manager) && !Authorize.isCurrentUser(id, UserType.Employee))
 				throw new HttpResponseException(HttpStatusCode.MethodNotAllowed);
 
 			Employee emp = db.Employees.Find(id);
@@ -59,12 +59,19 @@ namespace PostCompany.Controllers
 			if (form.Name != null)
 				emp.Name = form.Name;
 			if (form.Role != EmployeeRole.Manager)
-				emp.Role = form.Role;
+			{
+				if (Authorize.hasRole(EmployeeRole.Manager))
+					emp.Role = form.Role;
+				else
+					throw new HttpResponseException(HttpStatusCode.MethodNotAllowed);
+			}
 			if (form.OldPassword != null && form.NewPassword != null)
+			{
 				if (Security.VerifyMd5Hash(form.OldPassword, emp.Password))
 					emp.Password = Security.GetMd5Hash(form.NewPassword);
 				else
 					throw new HttpResponseException(HttpStatusCode.NotAcceptable);
+			}
 
 			db.Entry(emp).State = EntityState.Modified;
 
@@ -81,7 +88,7 @@ namespace PostCompany.Controllers
         }
 
         // POST api/Employee
-        public HttpResponseMessage PostEmployee(RegisterEmployeeForm form)
+        public HttpResponseMessage PostEmployee(RegisterEmployeeIForm form)
         {
 			if (!Authorize.hasRole(EmployeeRole.Manager))
 				throw new HttpResponseException(HttpStatusCode.MethodNotAllowed);
@@ -99,7 +106,7 @@ namespace PostCompany.Controllers
                 db.Employees.Add(employee);
                 db.SaveChanges();
 
-                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, employee);
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created);
                 return response;
             }
             else

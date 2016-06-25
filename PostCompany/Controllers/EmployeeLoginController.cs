@@ -20,7 +20,7 @@ namespace PostCompany.Controllers
         private PostCompanyContext db = new PostCompanyContext();
 
         // POST api/EmployeeLogin
-        public HttpResponseMessage PostEmployeeLogin(LoginForm form)
+        public HttpResponseMessage PostEmployeeLogin(LoginIForm form)
         {
 			form.Password = Security.GetMd5Hash(form.Password);
 			
@@ -32,7 +32,7 @@ namespace PostCompany.Controllers
 			if (user == null)
 				return Request.CreateResponse(HttpStatusCode.NotAcceptable);
 
-			Authentication.Authenticate(user.Id, user.Role);
+			Authentication.AuthenticateEmployee(user.Id, user.Role);
 			return Request.CreateResponse(HttpStatusCode.OK);
         }
     }
