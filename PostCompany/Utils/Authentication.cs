@@ -28,6 +28,11 @@ namespace PostCompany.Utils
 		{
 			return (UserType) System.Web.HttpContext.Current.Session["type"];
 		}
+
+        public static void LogOut()
+        {
+            System.Web.HttpContext.Current.Session.RemoveAll();
+        }
 	}
 
 	public enum UserType
