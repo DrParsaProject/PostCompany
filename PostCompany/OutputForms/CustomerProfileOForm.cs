@@ -12,6 +12,7 @@ namespace PostCompany.OutputForms
 		public string Username { get; set; }
 		public string Name { get; set; }
 		public string Phone { get; set; }
+		public string City { get; set; }
 		public string Address { get; set; }
 
 		public CustomerProfileOForm() { }
@@ -21,6 +22,7 @@ namespace PostCompany.OutputForms
 			Username = c.Username;
 			Name = c.Name;
 			Phone = c.Phone;
+			City = c.City;
 			Address = c.Address;
 		}
 	}
