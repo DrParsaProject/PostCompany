@@ -19,7 +19,7 @@ namespace PostCompany.Controllers
         private PostCompanyContext db = new PostCompanyContext();
 
 		// POST api/CustomerLogin
-		public HttpResponseMessage PostCustomerLogin(LoginIForm form)
+		public int PostCustomerLogin(LoginIForm form)
 		{
 			form.Password = Security.GetMd5Hash(form.Password);
 
@@ -29,10 +29,10 @@ namespace PostCompany.Controllers
 						select e.Id).SingleOrDefault();
 
 			if (id == 0)
-				return Request.CreateResponse(HttpStatusCode.NotAcceptable);
+				throw new HttpResponseException(HttpStatusCode.NotAcceptable);
 
 			Authentication.AuthenticateCustomer(id);
-			return Request.CreateResponse(HttpStatusCode.OK);
+			return id;
 		}
 
         protected override void Dispose(bool disposing)

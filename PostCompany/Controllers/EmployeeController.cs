@@ -23,7 +23,7 @@ namespace PostCompany.Controllers
 		public List<EmployeeProfileOForm> GetEmployees()
 		{
 			if (!Authorize.hasRole(EmployeeRole.Manager))
-				throw new HttpResponseException(HttpStatusCode.MethodNotAllowed);
+				throw new HttpResponseException(HttpStatusCode.Forbidden);
 
 			List<Employee> list = db.Employees.ToList();
 			List<EmployeeProfileOForm> res = new List<EmployeeProfileOForm>();
@@ -37,7 +37,7 @@ namespace PostCompany.Controllers
         public EmployeeProfileOForm GetEmployee(int id)
 		{
 			if (!Authorize.hasRole(EmployeeRole.Manager) && !Authorize.isCurrentUser(id, UserType.Employee))
-				throw new HttpResponseException(HttpStatusCode.MethodNotAllowed);
+				throw new HttpResponseException(HttpStatusCode.Forbidden);
             
 			Employee employee = db.Employees.Find(id);
             if (employee == null)
@@ -50,7 +50,7 @@ namespace PostCompany.Controllers
         public HttpResponseMessage PutEmployee(int id, EditEmployeeIForm form)
 		{
 			if (!Authorize.hasRole(EmployeeRole.Manager) && !Authorize.isCurrentUser(id, UserType.Employee))
-				throw new HttpResponseException(HttpStatusCode.MethodNotAllowed);
+				throw new HttpResponseException(HttpStatusCode.Forbidden);
 
 			Employee emp = db.Employees.Find(id);
 			if (emp == null)
@@ -91,7 +91,7 @@ namespace PostCompany.Controllers
         public HttpResponseMessage PostEmployee(RegisterEmployeeIForm form)
         {
 			if (!Authorize.hasRole(EmployeeRole.Manager))
-				throw new HttpResponseException(HttpStatusCode.MethodNotAllowed);
+				throw new HttpResponseException(HttpStatusCode.Forbidden);
 
 			if (form.Role == EmployeeRole.Manager)
 				throw new HttpResponseException(HttpStatusCode.NotAcceptable);
@@ -119,7 +119,7 @@ namespace PostCompany.Controllers
         public HttpResponseMessage DeleteEmployee(int id)
 		{
 			if (!Authorize.hasRole(EmployeeRole.Manager))
-				throw new HttpResponseException(HttpStatusCode.MethodNotAllowed);
+				throw new HttpResponseException(HttpStatusCode.Forbidden);
 
             Employee employee = db.Employees.Find(id);
             if (employee == null)

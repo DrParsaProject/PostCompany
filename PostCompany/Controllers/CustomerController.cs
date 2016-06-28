@@ -23,7 +23,7 @@ namespace PostCompany.Controllers
 		public CustomerProfileOForm GetCustomer(int id)
 		{
 			if (!Authorize.hasRole(EmployeeRole.Counter) && !Authorize.isCurrentUser(id, UserType.Customer))
-				throw new HttpResponseException(HttpStatusCode.MethodNotAllowed);
+				throw new HttpResponseException(HttpStatusCode.Forbidden);
 
 			Customer customer = db.Customers.Find(id);
 			if (customer == null)
@@ -36,7 +36,7 @@ namespace PostCompany.Controllers
 		public HttpResponseMessage PutCustomer(int id, EditCustomerIForm form)
 		{
 			if (!Authorize.hasRole(EmployeeRole.Counter) && !Authorize.isCurrentUser(id, UserType.Customer))
-				throw new HttpResponseException(HttpStatusCode.MethodNotAllowed);
+				throw new HttpResponseException(HttpStatusCode.Forbidden);
 
 			Customer c = db.Customers.Find(id);
 			if (c == null)
@@ -46,6 +46,8 @@ namespace PostCompany.Controllers
 				c.Name = form.Name;
 			if (form.Phone != null)
 				c.Phone = form.Phone;
+			if (form.City != null)
+				c.City = form.City;
 			if (form.Address != null)
 				c.Address = form.Address;
 			if (form.OldPassword != null && form.NewPassword != null)
@@ -74,7 +76,7 @@ namespace PostCompany.Controllers
 		public HttpResponseMessage PostCustomer(RegisterCustomerIForm form)
 		{
 			if (!Authorize.hasRole(EmployeeRole.Counter))
-				throw new HttpResponseException(HttpStatusCode.MethodNotAllowed);
+				throw new HttpResponseException(HttpStatusCode.Forbidden);
 
 			Customer c = new Customer();
 			c.Username = form.Username;
