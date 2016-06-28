@@ -24,5 +24,10 @@ namespace PostCompany.Utils
 			return id == Authentication.GetCurrnetUserId() && 
 				   type == Authentication.GetCurrnetUserType();
 		}
+
+		public static bool isA(UserType type)
+		{
+			return Authentication.GetCurrnetUserType() == type;
+		}
 	}
 }
