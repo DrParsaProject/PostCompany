@@ -184,6 +184,7 @@
     <Compile Include="Models\PostCompanyContext.cs" />
     <Compile Include="OutputForms\BoxOForm.cs" />
     <Compile Include="OutputForms\CustomerProfileOForm.cs" />
+    <Compile Include="OutputForms\LoginOForm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="OutputForms\EmployeeProfileOForm.cs" />
     <Compile Include="Utils\Authentication.cs" />

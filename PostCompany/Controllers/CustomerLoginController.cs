@@ -11,6 +11,7 @@ using System.Web.Http;
 using PostCompany.Models;
 using PostCompany.Forms;
 using PostCompany.Utils;
+using PostCompany.OutputForms;
 
 namespace PostCompany.Controllers
 {
@@ -19,7 +20,7 @@ namespace PostCompany.Controllers
         private PostCompanyContext db = new PostCompanyContext();
 
 		// POST api/CustomerLogin
-		public int PostCustomerLogin(LoginIForm form)
+		public LoginOForm PostCustomerLogin(LoginIForm form)
 		{
 			form.Password = Security.GetMd5Hash(form.Password);
 
@@ -32,7 +33,11 @@ namespace PostCompany.Controllers
 				throw new HttpResponseException(HttpStatusCode.NotAcceptable);
 
 			Authentication.AuthenticateCustomer(id);
-			return id;
+			LoginOForm res = new LoginOForm();
+			res.Id = id;
+			res.Role = 0;
+			res.Type = UserType.Customer;
+			return res;
 		}
 
         protected override void Dispose(bool disposing)

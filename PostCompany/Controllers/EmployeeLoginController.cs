@@ -12,6 +12,7 @@ using PostCompany.Models;
 using PostCompany.Forms;
 using PostCompany.Utils;
 using System.Web.SessionState;
+using PostCompany.OutputForms;
 
 namespace PostCompany.Controllers
 {
@@ -20,7 +21,7 @@ namespace PostCompany.Controllers
         private PostCompanyContext db = new PostCompanyContext();
 
         // POST api/EmployeeLogin
-        public int PostEmployeeLogin(LoginIForm form)
+        public LoginOForm PostEmployeeLogin(LoginIForm form)
         {
 			form.Password = Security.GetMd5Hash(form.Password);
 			
@@ -33,7 +34,11 @@ namespace PostCompany.Controllers
 				throw new HttpResponseException(HttpStatusCode.NotAcceptable);
 
 			Authentication.AuthenticateEmployee(user.Id, user.Role);
-			return user.Id;
+			LoginOForm res = new LoginOForm();
+			res.Id = user.Id;
+			res.Role = user.Role;
+			res.Type = UserType.Employee;
+			return res;
         }
     }
 }
