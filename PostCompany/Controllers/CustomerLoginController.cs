@@ -19,26 +19,26 @@ namespace PostCompany.Controllers
     {
         private PostCompanyContext db = new PostCompanyContext();
 
-		// POST api/CustomerLogin
-		public LoginOForm PostCustomerLogin(LoginIForm form)
-		{
-			form.Password = Security.GetMd5Hash(form.Password);
+        // POST api/CustomerLogin
+        public LoginOForm PostCustomerLogin(LoginIForm form)
+        {
+            form.Password = Security.GetMd5Hash(form.Password);
 
-			int id = (from e in db.Customers
-						where e.Username == form.Username &&
-							  e.Password == form.Password
-						select e.Id).SingleOrDefault();
+            int id = (from e in db.Customers
+                      where e.Username == form.Username &&
+                            e.Password == form.Password
+                      select e.Id).SingleOrDefault();
 
-			if (id == 0)
-				throw new HttpResponseException(HttpStatusCode.NotAcceptable);
+            if (id == 0)
+                throw new HttpResponseException(HttpStatusCode.NotAcceptable);
 
-			Authentication.AuthenticateCustomer(id);
-			LoginOForm res = new LoginOForm();
-			res.Id = id;
-			res.Role = 0;
-			res.Type = UserType.Customer;
-			return res;
-		}
+            Authentication.AuthenticateCustomer(id);
+            LoginOForm res = new LoginOForm();
+            res.Id = id;
+            res.Role = 0;
+            res.Type = UserType.Customer;
+            return res;
+        }
 
         protected override void Dispose(bool disposing)
         {

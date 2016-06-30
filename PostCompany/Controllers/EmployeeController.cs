@@ -90,11 +90,11 @@ namespace PostCompany.Controllers
         // POST api/Employee
         public HttpResponseMessage PostEmployee(RegisterEmployeeIForm form)
         {
-			if (!Authorize.hasRole(EmployeeRole.Manager))
-				throw new HttpResponseException(HttpStatusCode.Forbidden);
+            if (!Authorize.hasRole(EmployeeRole.Manager))
+                throw new HttpResponseException(HttpStatusCode.Forbidden);
 
-			if (form.Role == EmployeeRole.Manager)
-				throw new HttpResponseException(HttpStatusCode.NotAcceptable);
+            if (form.Role == EmployeeRole.Manager)
+                throw new HttpResponseException(HttpStatusCode.NotAcceptable);
 
 			Employee employee = new Employee();
 			employee.Username = form.Username;

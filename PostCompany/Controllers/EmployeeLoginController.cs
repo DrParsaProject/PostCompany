@@ -23,22 +23,22 @@ namespace PostCompany.Controllers
         // POST api/EmployeeLogin
         public LoginOForm PostEmployeeLogin(LoginIForm form)
         {
-			form.Password = Security.GetMd5Hash(form.Password);
-			
-			var user = (from e in db.Employees
-					  where e.Username == form.Username && 
-							e.Password == form.Password
-					  select new {e.Id, e.Role}).SingleOrDefault();
+            form.Password = Security.GetMd5Hash(form.Password);
 
-			if (user == null)
-				throw new HttpResponseException(HttpStatusCode.NotAcceptable);
+            var user = (from e in db.Employees
+                        where e.Username == form.Username &&
+                              e.Password == form.Password
+                        select new { e.Id, e.Role }).SingleOrDefault();
 
-			Authentication.AuthenticateEmployee(user.Id, user.Role);
-			LoginOForm res = new LoginOForm();
-			res.Id = user.Id;
-			res.Role = user.Role;
-			res.Type = UserType.Employee;
-			return res;
+            if (user == null)
+                throw new HttpResponseException(HttpStatusCode.NotAcceptable);
+
+            Authentication.AuthenticateEmployee(user.Id, user.Role);
+            LoginOForm res = new LoginOForm();
+            res.Id = user.Id;
+            res.Role = user.Role;
+            res.Type = UserType.Employee;
+            return res;
         }
     }
 }

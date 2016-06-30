@@ -7,10 +7,10 @@ using System.Web;
 
 namespace PostCompany.OutputForms
 {
-	public class LoginOForm
-	{
-		public int Id { get; set; }
-		public UserType Type { get; set; }
-		public EmployeeRole Role { get; set; }
-	}
+    public class LoginOForm
+    {
+        public int Id { get; set; }
+        public UserType Type { get; set; }
+        public EmployeeRole Role { get; set; }
+    }
 }
