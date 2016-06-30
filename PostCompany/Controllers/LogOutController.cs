@@ -12,7 +12,7 @@ namespace PostCompany.Controllers
     {
         
         // POST api/logout
-        public HttpResponseMessage GET()
+        public HttpResponseMessage Post()
         {
             Authentication.LogOut();
             return Request.CreateResponse(HttpStatusCode.OK);

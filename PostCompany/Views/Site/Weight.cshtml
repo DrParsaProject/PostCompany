@@ -1,0 +1,10 @@
+﻿@{
+    if (PostCompany.Utils.Authentication.GetCurrnetUserType() != PostCompany.Utils.UserType.Employee ||
+        PostCompany.Utils.Authentication.GetCurrnetUserRole() != PostCompany.Models.EmployeeRole.Weight)
+    {
+        Response.Redirect("~/Site/Login");
+    }
+    Layout = "";
+}
+
+<h2>Weight</h2>

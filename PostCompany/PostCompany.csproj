@@ -190,7 +190,7 @@
     <Compile Include="Utils\Authentication.cs" />
     <Compile Include="Utils\Authorize.cs" />
     <Compile Include="Utils\Security.cs" />
-    <Compile Include="Views\Site\SiteController.cs" />
+    <Compile Include="Controllers\SiteController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
@@ -198,6 +198,7 @@
     <Content Include="Content\Site\animate.css" />
     <Content Include="Content\Site\app.js" />
     <Content Include="Content\Site\css.css" />
+    <Content Include="Content\Site\managerCtrl.js" />
     <Content Include="Content\Site\getmdl-select.min.css" />
     <Content Include="Content\Site\getmdl-select.min.js" />
     <Content Include="Content\Site\customerCtrl.js" />
@@ -323,6 +324,9 @@
     <Content Include="Views\Shared\_SiteLayout.cshtml" />
     <Content Include="Views\Site\Customer.cshtml" />
     <Content Include="Views\Site\Manager.cshtml" />
+    <Content Include="Views\Site\Counter.cshtml" />
+    <Content Include="Views\Site\Transport.cshtml" />
+    <Content Include="Views\Site\Weight.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
