@@ -1,0 +1,277 @@
+﻿@{
+    if (!PostCompany.Utils.Authorize.isA(PostCompany.Utils.UserType.Customer))
+    {
+        Response.Redirect("~/Site/Login");
+    }
+    Layout = "";
+}
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>Material Design Lite</title>
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="images/android-desktop.png">
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Material Design Lite">
+    <link rel="apple-touch-icon-precomposed" href="images/ios-desktop.png">
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
+    <link rel="shortcut icon" href="images/favicon.png">
+    <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
+    <!--
+      <link rel="canonical" href="http://www.example.com/">
+    -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    @Styles.Render("~/Content/Site/css.css")
+    @Styles.Render("~/Content/Site/material.brown-blue.min.css")
+    @Styles.Render("~/Content/Site/styles_customer_detail.css")
+    @Styles.Render("~/Content/Site/animate.css")
+    @Styles.Render("~/Content/Site/modal.min.css")
+    @Styles.Render("~/Content/Site/material-modal.min.css")
+    @Styles.Render("~/Content/Site/getmdl-select.min.css")
+    @Scripts.Render("~/Content/Site/angular.min.js")
+    <style>
+        #view-source {
+            position: fixed;
+            display: block;
+            right: 0;
+            bottom: 0;
+            margin-right: 40px;
+            margin-bottom: 40px;
+            z-index: 900;
+        }
+    </style>
+</head>
+<body ng-app="postApp" class="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base">
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <header class="mdl-layout__header mdl-layout__header--scroll mdl-color--primary">
+            <div class="mdl-layout--large-screen-only mdl-layout__header-row">
+            </div>
+            <div class="mdl-layout--large-screen-only mdl-layout__header-row">
+                <h3>Customer Detail</h3>
+            </div>
+            <div class="mdl-layout--large-screen-only mdl-layout__header-row">
+            </div>
+            <div class="mdl-layout__tab-bar mdl-js-ripple-effect mdl-color--primary-dark">
+                <a href="#new_post" class="mdl-layout__tab is-active">New Post</a>
+                <a href="#sent_post" class="mdl-layout__tab">Sent Post</a>
+                <a href="#edit_profile" class="mdl-layout__tab">Edit profile</a>
+                <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-shadow--4dp mdl-color--accent" id="add">
+                    <i class="material-icons" role="presentation">add</i>
+                    <span class="visuallyhidden">Add</span>
+                </button>
+            </div>
+        </header>
+        <main class="mdl-layout__content">
+            <div class="mdl-layout__tab-panel is-active" id="edit_profile">
+                <section class="section--center mdl-grid mdl-grid--no-spacing">
+                    <div class="mdl-cell mdl-cell--12-col">
+                        <section class="section--center mdl-grid mdl-grid--no-spacing">
+                            <div style="margin: auto;">
+                                <div class="mdl-card mdl-shadow--6dp">
+                                    <div class="mdl-card__title mdl-color--primary mdl-color-text--white">
+                                        <h2 class="mdl-card__title-text">Edit Your Profile</h2>
+                                    </div>
+                                    <div class="mdl-card__supporting-text">
+                                        <form action="#" id="loginForm">
+                                            <div class="mdl-textfield mdl-js-textfield">
+                                                <input class="mdl-textfield__input" type="text" id="username" />
+                                                <label class="mdl-textfield__label" for="username">Reciever</label>
+                                            </div>
+                                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select">
+                                                <input class="mdl-textfield__input" type="text" id="sample2" value="" readonly tabindex="-1">
+                                                <label for="sample2">
+                                                    <i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
+                                                </label>
+                                                <label for="sample2" class="mdl-textfield__label">Status</label>
+                                                <ul for="sample2" class="mdl-menu mdl-menu--bottom-left mdl-js-menu" style="overflow-y:auto;height:120px">
+                                                    <li class="mdl-menu__item">Not Paid</li>
+                                                    <li class="mdl-menu__item">Pending</li>
+                                                    <li class="mdl-menu__item">Sending</li>
+                                                    <li class="mdl-menu__item">Recieved</li>
+                                                    <li class="mdl-menu__item">Canceled</li>
+                                                    <li class="mdl-menu__item">Failed</li>
+                                                </ul>
+                                            </div>
+                                            <div class="mdl-textfield mdl-js-textfield">
+                                                <input class="mdl-textfield__input" type="password" id="dest" />
+                                                <label class="mdl-textfield__label" for="dest">Destination</label>
+                                            </div><div class="mdl-textfield mdl-js-textfield">
+                                                <input class="mdl-textfield__input" type="password" id="from" />
+                                                <label class="mdl-textfield__label" for="from">From</label>
+                                            </div><div class="mdl-textfield mdl-js-textfield">
+                                                <input class="mdl-textfield__input" type="password" id="weight" />
+                                                <label class="mdl-textfield__label" for="weight">Weight</label>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="mdl-card__actions mdl-card--border">
+                                        <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="">Submit</button>
+                                        <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </section>
+            </div>
+            <div class="mdl-layout__tab-panel" id="sent_post">
+                <section class="section--center mdl-grid mdl-grid--no-spacing">
+                    <div style="margin:auto">
+                        <div class="mdl-cell mdl-cell--12-col">
+                            <table class="mdl-data-table mdl-js-data-table">
+                                <thead>
+                                    <tr>
+                                        <th class="mdl-data-table__cell--non-numeric">Reciever</th>
+                                        <th>Address</th>
+                                        <th>Add date</th>
+                                        <th>Send date</th>
+                                        <th>Recieve date</th>
+                                        <th>Weight</th>
+                                        <th>Cost</th>
+                                        <th>Status</th>
+                                        <!-- <th align="center">Edit</th> -->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="mdl-data-table__cell--non-numeric">Don Aubrey</td>
+                                        <td class="mdl-data-table__cell--non-numeric">Tehran-Narmak-IUST</td>
+                                        <td>6/5/16</td>
+                                        <td>7/5/16</td>
+                                        <td>10/5/16</td>
+                                        <td>12.25</td>
+                                        <td>12000</td>
+                                        <td class="mdl-data-table__cell--non-numeric">Sent</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td class="mdl-data-table__cell--non-numeric">Erfan Khaksar</td>
+                                        <td>Canada number 564</td>
+                                        <td>9/6/16</td>
+                                        <td>9/6/16</td>
+                                        <td>11/6/16</td>
+                                        <td>15/6/16</td>
+                                        <td>10.00</td>
+                                        <td>10000</td>
+                                        <td class="mdl-data-table__cell--non-numeric">Failed</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="mdl-layout__tab-panel" id="edit_profile">
+                <section class="section--center mdl-grid mdl-grid--no-spacing">
+                    <div style="margin: auto;">
+                        <div class="mdl-card mdl-shadow--6dp">
+                            <div class="mdl-card__title mdl-color--primary mdl-color-text--white">
+                                <h2 class="mdl-card__title-text">Add new employee</h2>
+                            </div>
+                            <div class="mdl-card__supporting-text">
+                                <form action="#" id="loginForm">
+                                    <div class="mdl-textfield mdl-js-textfield">
+                                        <input class="mdl-textfield__input" type="text" id="username" />
+                                        <label class="mdl-textfield__label" for="username">Name</label>
+                                    </div>
+
+                                    <div class="mdl-textfield mdl-js-textfield">
+                                        <input class="mdl-textfield__input" type="password" id="userpass" />
+                                        <label class="mdl-textfield__label" for="userpass">New Password</label>
+                                    </div>
+                                    <div class="mdl-textfield mdl-js-textfield">
+                                        <input class="mdl-textfield__input" type="password" id="userpass" />
+                                        <label class="mdl-textfield__label" for="userpass">Confirm Password</label>
+                                    </div>
+                                    <div class="mdl-textfield mdl-js-textfield">
+                                        <input class="mdl-textfield__input" type="number" id="userpass" />
+                                        <label class="mdl-textfield__label" for="userpass">Phone</label>
+                                    </div>
+                                    <div class="mdl-textfield mdl-js-textfield">
+                                        <input class="mdl-textfield__input" type="text" id="userpass" />
+                                        <label class="mdl-textfield__label" for="userpass">Address</label>
+                                    </div>
+                                    <div class="mdl-textfield mdl-js-textfield">
+                                        <input class="mdl-textfield__input" type="mail" id="userpass" />
+                                        <label class="mdl-textfield__label" for="userpass">Email</label>
+                                    </div>
+                                    <div class="mdl-textfield mdl-js-textfield">
+                                        <input class="mdl-textfield__input" type="password" id="userpass" />
+                                        <label class="mdl-textfield__label" for="userpass">Password</label>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="mdl-card__actions mdl-card--border">
+                                <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="document.getElementById('loginForm').submit();">Add</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+        <div id="modal" class="modal modal__bg">
+            <div class="modal__dialog">
+                <div class="modal__content">
+                    <div class="modal__header">
+                        <div class="modal__title">
+                            <h2 class="modal__title-text">Change row</h2>
+                        </div>
+                    </div>
+                    <div class="modal__text">
+                        <form action="#" id="loginForm">
+                            <div class="mdl-textfield mdl-js-textfield">
+                                <input class="mdl-textfield__input" type="text" id="username" />
+                                <label class="mdl-textfield__label" for="username">Username</label>
+                            </div>
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select">
+                                <input class="mdl-textfield__input" type="text" id="sample2" value="Belarus" readonly tabindex="-1">
+                                <label for="sample2">
+                                    <i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
+                                </label>
+                                <label for="sample2" class="mdl-textfield__label">Country</label>
+                                <ul for="sample2" class="mdl-menu mdl-menu--bottom-left mdl-js-menu" style="overflow-y:auto;height:80px">
+                                    <li class="mdl-menu__item">Germany</li>
+                                    <li class="mdl-menu__item">Belarus</li>
+                                    <li class="mdl-menu__item">Russia</li>
+                                </ul>
+                            </div>
+                            <div class="mdl-textfield mdl-js-textfield">
+                                <input class="mdl-textfield__input" type="password" id="userpass" />
+                                <label class="mdl-textfield__label" for="userpass">Password</label>
+                            </div>
+                            <!-- <span class="" style="color:rgb(174, 179, 176)">Login as:</span>
+                            <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-1">
+                              <input type="checkbox" id="switch-1" class="mdl-switch__input" checked>
+                            </label>
+                            <span class="mdl-switch__label">client</span> -->
+
+                        </form>
+                    </div>
+                    <div class="modal__footer">
+                        <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="document.getElementById('loginForm').submit();">Done</button>
+                        <a class="mdl-button mdl-button--colored mdl-js-button  modal__close">
+                            Cancel
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/Content/Site/material.min.js")
+    @Scripts.Render("~/Content/Site/app.js")
+    @Scripts.Render("~/Content/Site/customerCtrl.js")
+    @Scripts.Render("~/Content/Site/material-modal.min.js")
+    @Scripts.Render("~/Content/Site/getmdl-select.min.js")
+</body>
+</html>
+

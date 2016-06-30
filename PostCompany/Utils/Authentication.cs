@@ -26,8 +26,20 @@ namespace PostCompany.Utils
 		}
 		public static UserType GetCurrnetUserType()
 		{
-			return (UserType) System.Web.HttpContext.Current.Session["type"];
+            try
+            {
+                return (UserType) System.Web.HttpContext.Current.Session["type"];
+            }
+            catch
+            {
+                return UserType.UnAthorized;
+            }
 		}
+
+        public static EmployeeRole GetCurrnetUserRole()
+        {
+            return (EmployeeRole)System.Web.HttpContext.Current.Session["role"];
+        }
 
         public static void LogOut()
         {
@@ -38,6 +50,7 @@ namespace PostCompany.Utils
 	public enum UserType
 	{
 		Employee,
-		Customer
+		Customer,
+        UnAthorized
 	}
 }

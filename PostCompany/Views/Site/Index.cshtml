@@ -1,0 +1,33 @@
+﻿@{
+    Layout = "";
+
+    switch (PostCompany.Utils.Authentication.GetCurrnetUserType())
+    {
+        case PostCompany.Utils.UserType.Customer:
+            Response.Redirect("~/Site/Customer");
+            break;
+        case PostCompany.Utils.UserType.Employee:
+            switch (PostCompany.Utils.Authentication.GetCurrnetUserRole())
+            {
+                case PostCompany.Models.EmployeeRole.Counter:
+                    Response.Redirect("~/Site/Counter");
+                    break;
+                case PostCompany.Models.EmployeeRole.Manager:
+                    Response.Redirect("~/Site/Manager");
+                    break;
+                case PostCompany.Models.EmployeeRole.Transport:
+                    Response.Redirect("~/Site/Transport");
+                    break;
+                case PostCompany.Models.EmployeeRole.Weight:
+                    Response.Redirect("~/Site/Weight");
+                    break;
+            }
+            break;
+        case PostCompany.Utils.UserType.UnAthorized:
+            Response.Redirect("~/Site/Login");
+            break;
+    }
+        
+}
+
+
