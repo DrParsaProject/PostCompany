@@ -1,5 +1,5 @@
 ﻿var app = angular.module('postApp', []);
-app.controller('weightCtrl', function ($scope, $http, $window) {
+app.controller('transportCtrl', function ($scope, $http, $window) {
     $scope.editProfileUser = {};
     $scope.editPost = {};
     $scope.logout = function () {

@@ -4,6 +4,7 @@
         Response.Redirect("~/Site/Login");
     }
     Layout = "";
+    var myID = PostCompany.Utils.Authentication.GetCurrnetUserId();
 }
 
 <html lang="en">
@@ -12,7 +13,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <title>Material Design Lite</title>
+    <title>Customer Control Panel</title>
     <!-- Add to homescreen for Chrome on Android -->
     <meta name="mobile-web-app-capable" content="yes">
     <link rel="icon" sizes="192x192" href="images/android-desktop.png">
@@ -50,165 +51,117 @@
         }
     </style>
 </head>
-<body class="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base">
+<body ng-app="postApp" ng-controller="customerCtrl" class="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base">
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
         <header class="mdl-layout__header mdl-layout__header--scroll mdl-color--primary">
             <div class="mdl-layout--large-screen-only mdl-layout__header-row">
             </div>
             <div class="mdl-layout--large-screen-only mdl-layout__header-row">
-                <h3>Employee</h3>
+                <h3>Customer Control Panel</h3>
             </div>
             <div class="mdl-layout--large-screen-only mdl-layout__header-row">
             </div>
             <div class="mdl-layout__tab-bar mdl-js-ripple-effect mdl-color--primary-dark">
-                <a href="#post" class="mdl-layout__tab">Post</a>
-                <a href="#edit_profile" class="mdl-layout__tab">Edit profile</a>
-                <a href="#new_customer" class="mdl-layout__tab">New Customer</a>
-                <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-shadow--4dp mdl-color--accent" id="add">
-                    <i class="material-icons" role="presentation">add</i>
-                    <span class="visuallyhidden">Add</span>
+                <a href="#post" class="mdl-layout__tab">Post List</a>
+                <a href="#profile" class="mdl-layout__tab">Edit profile</a>
+                <button ng-click="logout()" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-shadow--4dp mdl-color--accent" id="add">
+                    <i class="material-icons" role="presentation">directions_run</i>
+                    <span class="visuallyhidden">Log Out</span>
                 </button>
             </div>
         </header>
-        <main class="mdl-layout__content">
+        <main style="background-color:#ffffff" class="mdl-layout__content">
             <div class="mdl-layout__tab-panel is-active" id="post">
                 <section class="section--center mdl-grid mdl-grid--no-spacing">
-                    <div style="margin:auto">
+                    <div style="margin:auto; margin:-20%;">
                         <div class="mdl-cell mdl-cell--12-col">
                             <table class="mdl-data-table mdl-js-data-table">
                                 <thead>
                                     <tr>
+                                        <th class="mdl-data-table__cell--non-numeric">Id</th>
+                                        <th class="mdl-data-table__cell--non-numeric">Sender</th>
                                         <th class="mdl-data-table__cell--non-numeric">Reciever</th>
-                                        <th>Destination</th>
-                                        <th>Add date</th>
-                                        <th>Send date</th>
-                                        <th>Recieve date</th>
+                                        <th class="mdl-data-table__cell--non-numeric">From</th>
+                                        <th class="mdl-data-table__cell--non-numeric">Destination</th>
+                                        <th class="mdl-data-table__cell--non-numeric">Add date</th>
+                                        <th class="mdl-data-table__cell--non-numeric">Send date</th>
+                                        <th class="mdl-data-table__cell--non-numeric">Recieve date</th>
                                         <th>Weight</th>
                                         <th>Cost</th>
-                                        <th>Status</th>
-                                        <th>Edit</th>
+                                        <th class="mdl-data-table__cell--non-numeric">Status</th>
+                                        <th class="mdl-data-table__cell--non-numeric">Edit</th>
                                         <!-- <th align="center">Edit</th> -->
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td class="mdl-data-table__cell--non-numeric">Don Aubrey</td>
-                                        <td class="mdl-data-table__cell--non-numeric">Tehran-Narmak-IUST</td>
-                                        <td>6/5/16</td>
-                                        <td>7/5/16</td>
-                                        <td>10/5/16</td>
-                                        <td>12.25</td>
-                                        <td>12000</td>
-                                        <td class="mdl-data-table__cell--non-numeric">Sent</td>
-                                        <td class="mdl-data-table__cell--non-numeric" onclick="Editpost(this.parentElement)">
-                                            <a href="" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored modal__trigger" style="min-width:30px" data-modal="#modal">
-                                                <i class="material-icons">mode_edit</i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="mdl-data-table__cell--non-numeric">Erfan Khaksar</td>
-                                        <td>Canada number 564</td>
-                                        <td>9/6/16</td>
-                                        <td>11/6/16</td>
-                                        <td>15/6/16</td>
-                                        <td>10.00</td>
-                                        <td>10000</td>
-                                        <td class="mdl-data-table__cell--non-numeric">Failed</td>
-                                        <td class="mdl-data-table__cell--non-numeric" onclick="Editpost(this.parentElement)">
-                                            <a href="" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored modal__trigger" style="min-width:30px" data-modal="#modal">
-                                                <i class="material-icons">mode_edit</i>
-                                            </a>
-                                        </td>
-                                    </tr>
+                                    @foreach (var box in (new PostCompany.Models.PostCompanyContext()).Boxes.Where(box => box.SenderId == myID).ToList())
+                                    {
+                                        <tr>
+                                            <td>@box.Id</td>
+                                            <td class="mdl-data-table__cell--non-numeric">@box.Sender.Name</td>
+                                            <td class="mdl-data-table__cell--non-numeric">@box.ReceiverName</td>
+                                            <td class="mdl-data-table__cell--non-numeric">@box.Sender.Address</td>
+                                            <td class="mdl-data-table__cell--non-numeric">@box.ReceiverAddress</td>
+                                            <td class="mdl-data-table__cell--non-numeric">@box.AddedOn</td>
+                                            <td class="mdl-data-table__cell--non-numeric">@box.SentOn</td>
+                                            <td class="mdl-data-table__cell--non-numeric">@box.ReceivedOn</td>
+                                            <td>@box.Weight</td>
+                                            <td>@box.Cost</td>
+                                            <td class="mdl-data-table__cell--non-numeric">@box.Status.ToString()</td>
+                                            <td onclick="Editpost(this.parentElement)">
+                                                <a href="" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored modal__trigger" style="min-width:30px" data-modal="#modal">
+                                                    <i class="material-icons">mode_edit</i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </section>
             </div>
-            <div class="mdl-layout__tab-panel" id="edit_profile">
+            <div class="mdl-layout__tab-panel" id="profile">
                 <section class="section--center mdl-grid mdl-grid--no-spacing">
                     <div style="margin: auto;">
-                        <div class="mdl-card mdl-shadow--6dp">
+                        <div class="mdl-card mdl-shadow--6dp" id="editFC">
                             <div class="mdl-card__title mdl-color--primary mdl-color-text--white">
-                                <h2 class="mdl-card__title-text">Edit Your profile</h2>
+                                <h2 class="mdl-card__title-text">Edit Profile</h2>
                             </div>
                             <div class="mdl-card__supporting-text">
-                                <form action="#" id="loginForm">
+                                <form action="#" id="EditProfileFormContainer">
                                     <div class="mdl-textfield mdl-js-textfield">
-                                        <input class="mdl-textfield__input" type="text" id="username" />
+                                        <input class="mdl-textfield__input" ng-model="editProfileUser.Name" type="text" id="username" />
                                         <label class="mdl-textfield__label" for="username">Name</label>
                                     </div>
-
                                     <div class="mdl-textfield mdl-js-textfield">
-                                        <input class="mdl-textfield__input" type="password" id="userpass" />
-                                        <label class="mdl-textfield__label" for="userpass">New Password</label>
+                                        <input class="mdl-textfield__input" ng-model="editProfileUser.OldPassword" type="password" id="userpass" />
+                                        <label class="mdl-textfield__label" for="userpass">Old Password</label>
                                     </div>
                                     <div class="mdl-textfield mdl-js-textfield">
-                                        <input class="mdl-textfield__input" type="password" id="userpass" />
-                                        <label class="mdl-textfield__label" for="userpass">Confirm Password</label>
+                                        <input class="mdl-textfield__input" ng-model="editProfileUser.NewPassword" type="password" id="phone" />
+                                        <label class="mdl-textfield__label" for="phone">New Password</label>
                                     </div>
                                     <div class="mdl-textfield mdl-js-textfield">
-                                        <input class="mdl-textfield__input" type="number" id="userpass" />
-                                        <label class="mdl-textfield__label" for="userpass">Phone</label>
+                                        <input class="mdl-textfield__input" ng-model="editProfileUser.ConfirmNewPassword" type="password" id="address" />
+                                        <label class="mdl-textfield__label" for="address">Confirm New Password</label>
                                     </div>
                                     <div class="mdl-textfield mdl-js-textfield">
-                                        <input class="mdl-textfield__input" type="text" id="userpass" />
-                                        <label class="mdl-textfield__label" for="userpass">Address</label>
+                                        <input class="mdl-textfield__input" ng-model="editProfileUser.Phone" type="text" id="number" />
+                                        <label class="mdl-textfield__label" for="username">Phone</label>
                                     </div>
                                     <div class="mdl-textfield mdl-js-textfield">
-                                        <input class="mdl-textfield__input" type="mail" id="userpass" />
-                                        <label class="mdl-textfield__label" for="userpass">Email</label>
+                                        <input class="mdl-textfield__input" ng-model="editProfileUser.City" type="text" id="username" />
+                                        <label class="mdl-textfield__label" for="username">City</label>
                                     </div>
                                     <div class="mdl-textfield mdl-js-textfield">
-                                        <input class="mdl-textfield__input" type="password" id="userpass" />
-                                        <label class="mdl-textfield__label" for="userpass">Password</label>
+                                        <input class="mdl-textfield__input" ng-model="editProfileUser.Address" type="text" id="username" />
+                                        <label class="mdl-textfield__label" for="username">Address</label>
                                     </div>
                                 </form>
                             </div>
                             <div class="mdl-card__actions mdl-card--border">
-                                <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="document.getElementById('loginForm').submit();">Save</button>
-                                <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="">Cancel</button>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </div>
-            <div class="mdl-layout__tab-panel" id="new_customer">
-                <section class="section--center mdl-grid mdl-grid--no-spacing">
-                    <div style="margin: auto;">
-                        <div class="mdl-card mdl-shadow--6dp">
-                            <div class="mdl-card__title mdl-color--primary mdl-color-text--white">
-                                <h2 class="mdl-card__title-text">New Customer</h2>
-                            </div>
-                            <div class="mdl-card__supporting-text">
-                                <form action="#" id="loginForm">
-                                    <div class="mdl-textfield mdl-js-textfield">
-                                        <input class="mdl-textfield__input" type="text" id="username" />
-                                        <label class="mdl-textfield__label" for="username">Name</label>
-                                    </div>
-
-                                    <div class="mdl-textfield mdl-js-textfield">
-                                        <input class="mdl-textfield__input" type="password" id="userpass" />
-                                        <label class="mdl-textfield__label" for="userpass">Password</label>
-                                    </div>
-                                    <div class="mdl-textfield mdl-js-textfield">
-                                        <input class="mdl-textfield__input" type="number" id="phone" />
-                                        <label class="mdl-textfield__label" for="phone">Phone</label>
-                                    </div>
-                                    <div class="mdl-textfield mdl-js-textfield">
-                                        <input class="mdl-textfield__input" type="text" id="address" />
-                                        <label class="mdl-textfield__label" for="address">Address</label>
-                                    </div>
-                                    <div class="mdl-textfield mdl-js-textfield">
-                                        <input class="mdl-textfield__input" type="text" id="city" />
-                                        <label class="mdl-textfield__label" for="city">City</label>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="mdl-card__actions mdl-card--border">
-                                <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="document.getElementById('loginForm').submit();">Add</button>
+                                <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" ng-click="EditProfile()">Add</button>
                             </div>
                         </div>
                     </div>
@@ -225,39 +178,31 @@
                     </div>
                     <div class="modal__text">
                         <div style="margin: auto;">
-                            <div class="mdl-card mdl-shadow--6dp">
+                            <div class="mdl-card mdl-shadow--6dp" id="editPostFC">
                                 <div class="mdl-card__supporting-text">
                                     <form action="#" id="loginForm">
-                                        <div class="mdl-textfield mdl-js-textfield">
-                                            <input class="mdl-textfield__input" type="text" id="m-username" />
-                                            <label class="mdl-textfield__label" for="m-username"></label>
-                                        </div>
                                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select">
-                                            <input class="mdl-textfield__input" type="text" id="m-stat" value="" readonly tabindex="-1">
+                                            <input class="mdl-textfield__input" ng-model="editPost.Status" ng-model="editEmp.Role" type="text" id="m-stat" value="" readonly tabindex="-1">
                                             <label for="m-stat">
                                                 <i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
                                             </label>
                                             <label for="m-stat" class="mdl-textfield__label">Status</label>
                                             <ul for="m-stat" class="mdl-menu mdl-menu--bottom-left mdl-js-menu" style="overflow-y:auto;height:120px">
-                                                <li class="mdl-menu__item">Not Paid</li>
                                                 <li class="mdl-menu__item">Pending</li>
-                                                <li class="mdl-menu__item">Sending</li>
-                                                <li class="mdl-menu__item">Recieved</li>
                                                 <li class="mdl-menu__item">Canceled</li>
-                                                <li class="mdl-menu__item">Failed</li>
                                             </ul>
                                         </div>
                                         <div class="mdl-textfield mdl-js-textfield">
-                                            <input class="mdl-textfield__input" type="text" id="m-dest" />
-                                            <label class="mdl-textfield__label" for="m-dest"></label>
+                                            <input class="mdl-textfield__input" ng-model="editPost.ReceiverName" type="text" id="userpass" />
+                                            <label class="mdl-textfield__label" for="userpass">Receiver Name</label>
                                         </div>
                                         <div class="mdl-textfield mdl-js-textfield">
-                                            <input class="mdl-textfield__input" type="number" step="any" id="m-weight" />
-                                            <label class="mdl-textfield__label" for="m_weight"></label>
+                                            <input class="mdl-textfield__input" ng-model="editPost.ReceiverCity" type="text" id="phone" />
+                                            <label class="mdl-textfield__label" for="phone">Receiver City</label>
                                         </div>
                                         <div class="mdl-textfield mdl-js-textfield">
-                                            <input class="mdl-textfield__input" type="number" id="m_cost" />
-                                            <label class="mdl-textfield__label" for="m_cost"></label>
+                                            <input class="mdl-textfield__input" ng-model="editPost.ReceiverAddress" type="text" id="address" />
+                                            <label class="mdl-textfield__label" for="address">Receiver Address</label>
                                         </div>
                                     </form>
                                 </div>
@@ -265,7 +210,7 @@
                         </div>
                     </div>
                     <div class="modal__footer">
-                        <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="document.getElementById('loginForm').submit();">Done</button>
+                        <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" ng-click="submitEditPost()">Done</button>
                         <a class="mdl-button mdl-button--colored mdl-js-button  modal__close">
                             Cancel
                         </a>
@@ -274,10 +219,17 @@
             </div>
         </div>
     </div>
-    <a href="https://github.com/google/material-design-lite/blob/master/templates/text-only/" target="_blank" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast">View Source</a>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/Content/Site/material.min.js")
+    @Scripts.Render("~/Content/Site/app.js")
+    @Scripts.Render("~/Content/Site/customerCtrl.js")
+    @Scripts.Render("~/Content/Site/material-modal.min.js")
+    @Scripts.Render("~/Content/Site/getmdl-select.min.js")
     <script type="text/javascript">
+        var postID;
         function Editpost(item) {
             atts = item.getElementsByTagName("td");
+            postID =  atts[0].innerText;
             document.getElementById("m-username").value = atts[0].innerText;
             document.getElementById("m-stat").value = atts[7].innerText;
             document.getElementById("m-dest").value = atts[1].innerText;
@@ -285,12 +237,9 @@
             document.getElementById("m_cost").value = atts[6].innerText;
         }
     </script>
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/Content/Site/material.min.js")
-    @Scripts.Render("~/Content/Site/app.js")
-    @Scripts.Render("~/Content/Site/customerCtrl.js")
-    @Scripts.Render("~/Content/Site/material-modal.min.js")
-    @Scripts.Render("~/Content/Site/getmdl-select.min.js")
+    <script>
+        var myId = @PostCompany.Utils.Authentication.GetCurrnetUserId();
+    </script>
+
 </body>
 </html>
-

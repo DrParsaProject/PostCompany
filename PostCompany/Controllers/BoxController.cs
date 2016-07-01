@@ -88,9 +88,12 @@ namespace PostCompany.Controllers
                 if (box.Sender.City != box.ReceiverCity)
                     box.Cost += 2000;
             }
-            if ((box.Status == PostStatus.Pending || box.Status == PostStatus.Sending) &&
-                      (form.Status == PostStatus.Sending || form.Status == PostStatus.Pending))
+            if (box.Status == PostStatus.Pending || box.Status == PostStatus.Sending) { 
+                if (form.Status == PostStatus.Sending || form.Status == PostStatus.Pending)
                 box.Status = form.Status;
+            }
+            else
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
         }
 
         private void EmpTransportEditBox(EditBoxIForm form, Box box)
@@ -105,9 +108,12 @@ namespace PostCompany.Controllers
                 box.Status = form.Status;
                 box.ReceivedOn = DateTime.Now.ToLocalTime();
             }
-            else if ((box.Status == PostStatus.Received || box.Status == PostStatus.Sending) &&
-                      (form.Status == PostStatus.Failed || form.Status == PostStatus.Received || form.Status == PostStatus.Sending))
-                box.Status = form.Status;
+            else if (box.Status == PostStatus.Received || box.Status == PostStatus.Sending){
+                if (form.Status == PostStatus.Failed || form.Status == PostStatus.Received || form.Status == PostStatus.Sending)
+                    box.Status = form.Status;
+            }
+            else
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
         }
 
         private void EmpCounterEditBox(EditBoxIForm form, Box box)
@@ -119,16 +125,23 @@ namespace PostCompany.Controllers
             if (form.ReceiverAddress != null)
                 box.ReceiverAddress = form.ReceiverAddress;
 
-            if (box.Status == PostStatus.NotPaid || box.Status == PostStatus.Pending)
+            if (box.Status == PostStatus.NotPaid || box.Status == PostStatus.Pending){
                 if (form.Status == PostStatus.NotPaid || form.Status == PostStatus.Pending)
                     box.Status = form.Status;
+            }
+            else
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
         }
 
         private void CustomerEditBox(EditBoxIForm form, Box box)
         {
             if (box.Status == PostStatus.Canceled || box.Status == PostStatus.Pending)
+            {
                 if (form.Status == PostStatus.Canceled || form.Status == PostStatus.Pending)
                     box.Status = form.Status;
+            }
+            else
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
         }
 
         // POST api/Box

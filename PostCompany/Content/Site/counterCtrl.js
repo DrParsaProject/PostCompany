@@ -153,7 +153,22 @@ app.controller('counterCtrl', function ($scope, $http, $window) {
             });
         });
     };
-
+    $scope.GetProfile = function () {
+        if ($scope.editProfileUser.ConfirmNewPassword != $scope.editProfileUser.NewPassword)
+            return;
+        $http({
+            method: 'GET',
+            url: baseUrl + "Employee/" + myId,
+            data: {},
+            headers: { 'Content-Type': 'application/json' }
+        }).then(function (response) {
+            $scope.editProfileUser = response.data;
+        }, function (response) {
+            //Second function handles error
+            console.log(":| " + response.data);
+        });
+    };
+    $scope.GetProfile();
 
 });
 

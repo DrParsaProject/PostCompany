@@ -114,31 +114,72 @@ app.controller('managerCtrl', function ($scope, $http, $window) {
             data: $scope.editEmp,
             headers: { 'Content-Type': 'application/json' }
         }).then(function (response) {
-            $('#newEmpFormContainer').addClass('animated fadeOutDown');
-            $('#newEmpFormContainer').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
-                $('#newEmpFormContainer').removeClass('animated fadeOutDown');
-                $('#newEmpFormContainer').addClass('animated fadeInDown');
+            $('#editFormC').addClass('animated fadeOutDown');
+            $('#editFormC').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+                $('#editFormC').removeClass('animated fadeOutDown');
+                $('#editFormC').addClass('animated fadeInDown');
             });
-            $('#newEmpFormContainer').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
-                $('#newEmpFormContainer').removeClass('animated fadeInDown');
+            $('#editFormC').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+                $('#editFormC').removeClass('animated fadeInDown');
             });
             location.reload(true);
         }, function (response) {
             //Second function handles error
             console.log(":| " + response.data);
-            $('#newEmpFormContainer').addClass('animated shake');
-            $('#newEmpFormContainer').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
-                $('#newEmpFormContainer').removeClass('animated shake');
+            $('#editFormC').addClass('animated shake');
+            $('#editFormC').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+                $('#editFormC').removeClass('animated shake');
             });
         });
     };
+    $scope.DeleteEmp = function () {
+        $http({
+            method: 'DELETE',
+            url: baseUrl + "Employee/" + $scope.editEmp.id,
+            data: {},
+            headers: { 'Content-Type': 'application/json' }
+        }).then(function (response) {
+            $('#editFormC').addClass('animated fadeOutDown');
+            $('#editFormC').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+                $('#editFormC').removeClass('animated fadeOutDown');
+                $('#editFormC').addClass('animated fadeInDown');
+            });
+            $('#editFormC').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+                $('#editFormC').removeClass('animated fadeInDown');
+            });
+            location.reload(true);
+        }, function (response) {
+            //Second function handles error
+            console.log(":| " + response.data);
+            $('#editFormC').addClass('animated shake');
+            $('#editFormC').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+                $('#editFormC').removeClass('animated shake');
+            });
+        });
+    };
+    
     Editpost = function (item) {
         console.log(item);
         atts = item.getElementsByTagName("td");
-        $scope.editEmp.Name = atts[2].innerText;
+        //$scope.editEmp.Name = atts[2].innerText;
         $scope.editEmp.id = atts[0].innerText;
-        $scope.editEmp.Role = atts[3].innerText;
+        //$scope.editEmp.Role = atts[3].innerText;
     }
-
+    $scope.GetProfile = function () {
+        if ($scope.editProfileUser.ConfirmNewPassword != $scope.editProfileUser.NewPassword)
+            return;
+        $http({
+            method: 'GET',
+            url: baseUrl + "Employee/" + myId,
+            data: {},
+            headers: { 'Content-Type': 'application/json' }
+        }).then(function (response) {
+            $scope.editProfileUser = response.data;
+        }, function (response) {
+            //Second function handles error
+            console.log(":| " + response.data);
+        });
+    };
+    $scope.GetProfile();
 });
 
