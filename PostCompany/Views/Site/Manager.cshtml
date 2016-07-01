@@ -14,43 +14,44 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <title>Material Design Lite</title>
-    <!-- Add to homescreen for Chrome on Android -->
-    <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" sizes="192x192" href="images/android-desktop.png">
-    <!-- Add to homescreen for Safari on iOS -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="Material Design Lite">
-    <link rel="apple-touch-icon-precomposed" href="images/ios-desktop.png">
-    <!-- Tile icon for Win8 (144x144 + tile color) -->
-    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
-    <meta name="msapplication-TileColor" content="#3372DF">
-    <link rel="shortcut icon" href="images/favicon.png">
-    <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
-    <!--
-      <link rel="canonical" href="http://www.example.com/">
-    -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    @Styles.Render("~/Content/Site/css.css")
-    @Styles.Render("~/Content/Site/material.brown-blue.min.css")
-    @Styles.Render("~/Content/Site/styles_customer_detail.css")
-    @Styles.Render("~/Content/Site/animate.css")
-    @Styles.Render("~/Content/Site/modal.min.css")
-    @Styles.Render("~/Content/Site/material-modal.min.css")
-    @Styles.Render("~/Content/Site/getmdl-select.min.css")
-    @Scripts.Render("~/Content/Site/angular.min.js")
-    @*<style>
-        #view-source {
-            position: fixed;
-            display: block;
-            right: 0;
-            bottom: 0;
-            margin-right: 40px;
-            margin-bottom: 40px;
-            z-index: 900;
-        }
-    </style>*@
+    <title>
+        Manager Control Panel</title>
+        <!-- Add to homescreen for Chrome on Android -->
+        <meta name="mobile-web-app-capable" content="yes">
+        <link rel="icon" sizes="192x192" href="images/android-desktop.png">
+        <!-- Add to homescreen for Safari on iOS -->
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="apple-mobile-web-app-title" content="Material Design Lite">
+        <link rel="apple-touch-icon-precomposed" href="images/ios-desktop.png">
+        <!-- Tile icon for Win8 (144x144 + tile color) -->
+        <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+        <meta name="msapplication-TileColor" content="#3372DF">
+        <link rel="shortcut icon" href="images/favicon.png">
+        <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
+        <!--
+          <link rel="canonical" href="http://www.example.com/">
+        -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        @Styles.Render("~/Content/Site/css.css")
+        @Styles.Render("~/Content/Site/material.brown-blue.min.css")
+        @Styles.Render("~/Content/Site/styles_customer_detail.css")
+        @Styles.Render("~/Content/Site/animate.css")
+        @Styles.Render("~/Content/Site/modal.min.css")
+        @Styles.Render("~/Content/Site/material-modal.min.css")
+        @Styles.Render("~/Content/Site/getmdl-select.min.css")
+        @Scripts.Render("~/Content/Site/angular.min.js")
+        @*<style>
+                #view-source {
+                    position: fixed;
+                    display: block;
+                    right: 0;
+                    bottom: 0;
+                    margin-right: 40px;
+                    margin-bottom: 40px;
+                    z-index: 900;
+                }
+            </style>*@
 </head>
 <body ng-app="postApp" ng-controller="managerCtrl" class="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base">
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
@@ -66,7 +67,7 @@
                 <a href="#empList" class="mdl-layout__tab">Employees</a>
                 <a href="#new_emp" class="mdl-layout__tab" onclick="document.getElementById('newUserSelect').style += 'width:100px;';">Add New Employee</a>
                 <a href="#profile" class="mdl-layout__tab">Edit Profile</a>
-                <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-shadow--4dp mdl-color--accent" id="add">
+                <button ng-click="logout()" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-shadow--4dp mdl-color--accent" id="add">
                     <i class="material-icons" role="presentation">directions_run</i>
                     <span class="visuallyhidden">Log Out</span>
                 </button>
@@ -75,55 +76,6 @@
         <main class="mdl-layout__content" style="background-color:#ffffff">
             <div class="mdl-layout__tab-panel is-active" id="empList">
                 <section class="section--center mdl-grid mdl-grid--no-spacing">
-                    <div style="margin: auto;">
-                        <div class="mdl-cell mdl-cell--12-col">
-                            <table class="mdl-data-table mdl-js-data-table">
-                                <thead>
-                                    <tr>
-                                        <th class="mdl-data-table__cell--non-numeric">Name</th>
-                                        <th>Username</th>
-                                        <th>ID Number</th>
-                                        <th class="mdl-data-table__cell--non-numeric">Edit</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="mdl-data-table__cell--non-numeric">Don Aubrey</td>
-                                        <td>Don1984</td>
-                                        <td>49021</td>
-                                        <td class="mdl-data-table__cell--non-numeric" onclick="EditEmpList(this.parentElement)">
-                                            <a href="" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored modal__trigger" style="min-width:30px" data-modal="#modal">
-                                                <i class="material-icons">mode_edit</i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="mdl-data-table__cell--non-numeric">Sophia Carson</td>
-                                        <td>Sophie32</td>
-                                        <td>10258</td>
-                                        <td class="mdl-data-table__cell--non-numeric" onclick="EditEmpList(this.parentElement)">
-                                            <a href="" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored modal__trigger" style="min-width:30px" data-modal="#modal">
-                                                <i class="material-icons">mode_edit</i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="mdl-data-table__cell--non-numeric">Steve Moreno</td>
-                                        <td>Steve.M</td>
-                                        <td>12359</td>
-                                        <td class="mdl-data-table__cell--non-numeric" onclick="EditEmpList(this.parentElement)">
-                                            <a href="" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored modal__trigger" style="min-width:30px" data-modal="#modal">
-                                                <i class="material-icons">mode_edit</i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <!-- <a href="" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored modal__trigger" data-modal="#modal">
-              Launch Modal
-            </a> -->
-                        </div>
-                    </div>
                     <div style="margin:auto">
                         <div class="mdl-cell mdl-cell--12-col">
                             <table class="mdl-data-table mdl-js-data-table">
@@ -133,20 +85,24 @@
                                         <th class="mdl-data-table__cell--non-numeric">UserName</th>
                                         <th class="mdl-data-table__cell--non-numeric">Name</th>
                                         <th class="mdl-data-table__cell--non-numeric">Role</th>
+                                        <th class="mdl-data-table__cell--non-numeric">Edit</th>
                                     </tr>
                                 </thead>
-                                <tbody ng-repeat="x in emps">
+                                <tbody>
+                                    @foreach (var person in (new PostCompany.Models.PostCompanyContext()).Employees.ToList())
+                                    {                             
                                     <tr>
-                                        <th>{{x.Id}}</th>
-                                        <th class="mdl-data-table__cell--non-numeric">{{x.Username}}</th>
-                                        <th class="mdl-data-table__cell--non-numeric">{{x.Name ? x.Name : "--"}}</th>
-                                        <th class="mdl-data-table__cell--non-numeric">{{roleStr(x.Role)}}</th>
+                                        <td>@person.Id</td>
+                                        <td class="mdl-data-table__cell--non-numeric">@person.Username</td>
+                                        <td class="mdl-data-table__cell--non-numeric">@person.Name</td>
+                                        <td class="mdl-data-table__cell--non-numeric">@person.Role.ToString()</td>
                                         <td class="mdl-data-table__cell--non-numeric" onclick="Editpost(this.parentElement)">
                                             <a href="" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored modal__trigger" style="min-width:30px" data-modal="#modal">
                                                 <i class="material-icons">mode_edit</i>
                                             </a>
                                         </td>
                                     </tr>
+                                    }
                                 </tbody>
                             </table>
                         </div>
@@ -207,35 +163,31 @@
                     <div style="margin: auto;">
                         <div class="mdl-card mdl-shadow--6dp">
                             <div class="mdl-card__title mdl-color--primary mdl-color-text--white">
-                                <h2 class="mdl-card__title-text">New Customer</h2>
+                                <h2 class="mdl-card__title-text">Edit Profile</h2>
                             </div>
                             <div class="mdl-card__supporting-text">
-                                <form action="#" id="loginForm">
+                                <form action="#" id="EditProfileFormContainer">
                                     <div class="mdl-textfield mdl-js-textfield">
-                                        <input class="mdl-textfield__input" type="text" id="username" />
+                                        <input class="mdl-textfield__input" ng-model="editProfileUser.Name" type="text" id="username" />
                                         <label class="mdl-textfield__label" for="username">Name</label>
                                     </div>
 
                                     <div class="mdl-textfield mdl-js-textfield">
-                                        <input class="mdl-textfield__input" type="password" id="userpass" />
-                                        <label class="mdl-textfield__label" for="userpass">Password</label>
+                                        <input class="mdl-textfield__input" ng-model="editProfileUser.OldPassword" type="password" id="userpass" />
+                                        <label class="mdl-textfield__label" for="userpass">Old Password</label>
                                     </div>
                                     <div class="mdl-textfield mdl-js-textfield">
-                                        <input class="mdl-textfield__input" type="number" id="phone" />
-                                        <label class="mdl-textfield__label" for="phone">Phone</label>
+                                        <input class="mdl-textfield__input" ng-model="editProfileUser.NewPassword" type="password" id="phone" />
+                                        <label class="mdl-textfield__label" for="phone">New Password</label>
                                     </div>
                                     <div class="mdl-textfield mdl-js-textfield">
-                                        <input class="mdl-textfield__input" type="text" id="address" />
-                                        <label class="mdl-textfield__label" for="address">Address</label>
-                                    </div>
-                                    <div class="mdl-textfield mdl-js-textfield">
-                                        <input class="mdl-textfield__input" type="text" id="city" />
-                                        <label class="mdl-textfield__label" for="city">City</label>
+                                        <input class="mdl-textfield__input" ng-model="editProfileUser.ConfirmNewPassword" type="password" id="address" />
+                                        <label class="mdl-textfield__label" for="address">Confirm New Password</label>
                                     </div>
                                 </form>
                             </div>
                             <div class="mdl-card__actions mdl-card--border">
-                                <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="document.getElementById('loginForm').submit();">Add</button>
+                                <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" ng-click="EditProfile()">Add</button>
                             </div>
                         </div>
                     </div>
@@ -247,7 +199,7 @@
                 <div class="modal__content">
                     <div class="modal__header">
                         <div class="modal__title">
-                            <h2 class="modal__title-text">Change row</h2>
+                            <h2 class="modal__title-text">Edit</h2>
                         </div>
                     </div>
                     <div class="modal__text">
@@ -255,36 +207,31 @@
                             <div class="mdl-card mdl-shadow--6dp">
                                 <div class="mdl-card__supporting-text">
                                     <form action="#" id="loginForm">
-                                        <div class="mdl-textfield mdl-js-textfield">
-                                            <input class="mdl-textfield__input" type="text" id="m-username" />
-                                            <label class="mdl-textfield__label" for="m-username"></label>
-                                        </div>
+
                                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select">
-                                            <input class="mdl-textfield__input" type="text" id="m-stat" value="" readonly tabindex="-1">
+                                            <input class="mdl-textfield__input" ng-model="editEmp.Role" type="text" id="m-stat" value="" readonly tabindex="-1">
                                             <label for="m-stat">
                                                 <i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
                                             </label>
-                                            <label for="m-stat" class="mdl-textfield__label">Status</label>
+                                            <label for="m-stat" class="mdl-textfield__label">Role</label>
                                             <ul for="m-stat" class="mdl-menu mdl-menu--bottom-left mdl-js-menu" style="overflow-y:auto;height:120px">
+                                                <li class="mdl-menu__item">Manager</li>
+                                                <li class="mdl-menu__item">Counter</li>
+                                                <li class="mdl-menu__item">Transport</li>
+                                                <li class="mdl-menu__item">Weight</li>
+                                            </ul>
+                                            @*<ul for="m-stat" class="mdl-menu mdl-menu--bottom-left mdl-js-menu" style="overflow-y:auto;height:120px">
                                                 <li class="mdl-menu__item">Not Paid</li>
                                                 <li class="mdl-menu__item">Pending</li>
                                                 <li class="mdl-menu__item">Sending</li>
                                                 <li class="mdl-menu__item">Recieved</li>
                                                 <li class="mdl-menu__item">Canceled</li>
                                                 <li class="mdl-menu__item">Failed</li>
-                                            </ul>
+                                            </ul>*@
                                         </div>
                                         <div class="mdl-textfield mdl-js-textfield">
-                                            <input class="mdl-textfield__input" type="text" id="m-dest" />
-                                            <label class="mdl-textfield__label" for="m-dest"></label>
-                                        </div>
-                                        <div class="mdl-textfield mdl-js-textfield">
-                                            <input class="mdl-textfield__input" type="number" step="any" id="m-weight" />
-                                            <label class="mdl-textfield__label" for="m_weight"></label>
-                                        </div>
-                                        <div class="mdl-textfield mdl-js-textfield">
-                                            <input class="mdl-textfield__input" type="number" id="m_cost" />
-                                            <label class="mdl-textfield__label" for="m_cost"></label>
+                                            <input class="mdl-textfield__input" ng-model="editEmp.Name" type="text" id="m-username" />
+                                            <label class="mdl-textfield__label" for="m-username">Name</label>
                                         </div>
                                     </form>
                                 </div>
@@ -292,7 +239,7 @@
                         </div>
                     </div>
                     <div class="modal__footer">
-                        <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="document.getElementById('loginForm').submit();">Done</button>
+                        <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" ng-click="EditEmp()">Done</button>
                         <a class="mdl-button mdl-button--colored mdl-js-button  modal__close">
                             Cancel
                         </a>
@@ -302,11 +249,14 @@
         </div>
     </div>
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/Content/Site/material.min.js")
     @Scripts.Render("~/Content/Site/app.js")
     @Scripts.Render("~/Content/Site/managerCtrl.js")
+    @Scripts.Render("~/Content/Site/material.min.js")
     @Scripts.Render("~/Content/Site/material-modal.min.js")
     @Scripts.Render("~/Content/Site/getmdl-select.min.js")
+    <script>
+        var myId = @PostCompany.Utils.Authentication.GetCurrnetUserId();
+    </script>
 </body>
 </html>
 

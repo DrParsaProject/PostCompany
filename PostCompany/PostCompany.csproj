@@ -198,6 +198,7 @@
     <Content Include="Content\Site\animate.css" />
     <Content Include="Content\Site\app.js" />
     <Content Include="Content\Site\css.css" />
+    <Content Include="Content\Site\counterCtrl.js" />
     <Content Include="Content\Site\managerCtrl.js" />
     <Content Include="Content\Site\getmdl-select.min.css" />
     <Content Include="Content\Site\getmdl-select.min.js" />

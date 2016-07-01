@@ -1,6 +1,8 @@
 ﻿var app = angular.module('postApp', []);
 app.controller('managerCtrl', function ($scope, $http, $window) {
     $scope.newuser = {};
+    $scope.editEmp = {};
+    $scope.editProfileUser = {};
     $scope.logout = function () {
         $http({
             method: 'POST',
@@ -51,28 +53,79 @@ app.controller('managerCtrl', function ($scope, $http, $window) {
             $('#newEmpFormContainer').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
                 $('#newEmpFormContainer').removeClass('animated fadeInDown');
             });
-            refreshEmpList();
+            location.reload(true)
         }, function (response) {
             //Second function handles error
             console.log(":| " + response.data);
         });
         $scope.newuser.Role = $scope.roleStr($scope.newuser.Role);
     };
-
-    refreshEmpList = function () {
+    //refreshEmpList = function () {
+    //    $http({
+    //        method: 'GET',
+    //        url: baseUrl + "Employee",
+    //        data: {},
+    //        headers: { 'Content-Type': 'application/json' }
+    //    }).then(function (response) {
+    //        console.log(response.data);
+    //        $scope.emps = response.data;
+    //    }, function (response) {
+    //        //Second function handles error
+    //        console.log(":| " + response.data);
+    //    });
+    //}
+    //refreshEmpList();
+    $scope.EditProfile = function () {
+        if ($scope.editProfileUser.ConfirmNewPassword != $scope.editProfileUser.NewPassword)
+            return;
         $http({
-            method: 'GET',
-            url: baseUrl + "Employee",
-            data: {},
+            method: 'PUT',
+            url: baseUrl + "Employee/" + myId,
+            data: $scope.editProfileUser,
             headers: { 'Content-Type': 'application/json' }
         }).then(function (response) {
-            console.log(response.data);
-            $scope.emps = response.data;
+            $('#EditProfileFormContainer').addClass('animated fadeOutDown');
+            $('#EditProfileFormContainer').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+                $('#EditProfileFormContainer').removeClass('animated fadeOutDown');
+                $('#EditProfileFormContainer').addClass('animated fadeInDown');
+            });
+            $('#EditProfileFormContainer').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+                $('#EditProfileFormContainer').removeClass('animated fadeInDown');
+            });
+            location.reload(true);
         }, function (response) {
             //Second function handles error
             console.log(":| " + response.data);
         });
+    };
+    $scope.EditEmp = function () {
+        $http({
+            method: 'PUT',
+            url: baseUrl + "Employee/" + $scope.editEmp.id,
+            data: $scope.editEmp,
+            headers: { 'Content-Type': 'application/json' }
+        }).then(function (response) {
+            $('#newEmpFormContainer').addClass('animated fadeOutDown');
+            $('#newEmpFormContainer').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+                $('#newEmpFormContainer').removeClass('animated fadeOutDown');
+                $('#newEmpFormContainer').addClass('animated fadeInDown');
+            });
+            $('#newEmpFormContainer').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+                $('#newEmpFormContainer').removeClass('animated fadeInDown');
+            });
+            location.reload(true);
+        }, function (response) {
+            //Second function handles error
+            console.log(":| " + response.data);
+        });
+    };
+    Editpost = function (item) {
+        console.log(item);
+        atts = item.getElementsByTagName("td");
+        $scope.editEmp.Name = atts[2].innerText;
+        $scope.editEmp.id = atts[0].innerText;
+        $scope.editEmp.Role = atts[3].innerText;
     }
-    refreshEmpList();
+
 });
 
