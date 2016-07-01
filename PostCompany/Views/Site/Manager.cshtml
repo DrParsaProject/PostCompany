@@ -75,6 +75,55 @@
         <main class="mdl-layout__content" style="background-color:#ffffff">
             <div class="mdl-layout__tab-panel is-active" id="empList">
                 <section class="section--center mdl-grid mdl-grid--no-spacing">
+                    <div style="margin: auto;">
+                        <div class="mdl-cell mdl-cell--12-col">
+                            <table class="mdl-data-table mdl-js-data-table">
+                                <thead>
+                                    <tr>
+                                        <th class="mdl-data-table__cell--non-numeric">Name</th>
+                                        <th>Username</th>
+                                        <th>ID Number</th>
+                                        <th class="mdl-data-table__cell--non-numeric">Edit</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="mdl-data-table__cell--non-numeric">Don Aubrey</td>
+                                        <td>Don1984</td>
+                                        <td>49021</td>
+                                        <td class="mdl-data-table__cell--non-numeric" onclick="EditEmpList(this.parentElement)">
+                                            <a href="" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored modal__trigger" style="min-width:30px" data-modal="#modal">
+                                                <i class="material-icons">mode_edit</i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="mdl-data-table__cell--non-numeric">Sophia Carson</td>
+                                        <td>Sophie32</td>
+                                        <td>10258</td>
+                                        <td class="mdl-data-table__cell--non-numeric" onclick="EditEmpList(this.parentElement)">
+                                            <a href="" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored modal__trigger" style="min-width:30px" data-modal="#modal">
+                                                <i class="material-icons">mode_edit</i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="mdl-data-table__cell--non-numeric">Steve Moreno</td>
+                                        <td>Steve.M</td>
+                                        <td>12359</td>
+                                        <td class="mdl-data-table__cell--non-numeric" onclick="EditEmpList(this.parentElement)">
+                                            <a href="" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored modal__trigger" style="min-width:30px" data-modal="#modal">
+                                                <i class="material-icons">mode_edit</i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <!-- <a href="" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored modal__trigger" data-modal="#modal">
+              Launch Modal
+            </a> -->
+                        </div>
+                    </div>
                     <div style="margin:auto">
                         <div class="mdl-cell mdl-cell--12-col">
                             <table class="mdl-data-table mdl-js-data-table">
