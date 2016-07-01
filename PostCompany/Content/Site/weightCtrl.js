@@ -1,7 +1,5 @@
 ﻿var app = angular.module('postApp', []);
-app.controller('counterCtrl', function ($scope, $http, $window) {
-    $scope.newpost = {};
-    $scope.newcustomer = {};
+app.controller('weightCtrl', function ($scope, $http, $window) {
     $scope.editProfileUser = {};
     $scope.editPost = {};
     $scope.logout = function () {
@@ -45,36 +43,10 @@ app.controller('counterCtrl', function ($scope, $http, $window) {
             return 5;
         }
     }
-    $scope.submitNewPost = function () {
-        $scope.newpost.Status = 0;
-        $http({
-            method: 'POST',
-            url: baseUrl + "Box",
-            data: $scope.newpost,
-            headers: { 'Content-Type': 'application/json' }
-        }).then(function (response) {
-            $('#newPostFC').addClass('animated fadeOutDown');
-            $('#newPostFC').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
-                $('#newPostFC').removeClass('animated fadeOutDown');
-                $('#newPostFC').addClass('animated fadeInDown');
-            });
-            $('#newPostFC').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
-                $('#newPostFC').removeClass('animated fadeInDown');
-            });
-            location.reload(true);
-        }, function (response) {
-            //Second function handles error
-            console.log(":| " + response.data);
-            $('#newPostFC').addClass('animated shake');
-            $('#newPostFC').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
-                $('#newPostFC').removeClass('animated shake');
-            });
-        });
-    };
+
     $scope.submitEditPost = function () {
         console.log("asdfasdfasdfasdfasdf");
         $scope.editPost.Status = $scope.strStatus($scope.editPost.Status);
-        console.log($scope.editPost.Status);
         $http({
             method: 'PUT',
             url: baseUrl + "Box/" + postID,
@@ -128,32 +100,5 @@ app.controller('counterCtrl', function ($scope, $http, $window) {
 
         });
     };
-    $scope.submitNewcustomer = function () {
-        $http({
-            method: 'POST',
-            url: baseUrl + "Customer",
-            data: $scope.newcustomer,
-            headers: { 'Content-Type': 'application/json' }
-        }).then(function (response) {
-            $('#newCustomerFC').addClass('animated fadeOutDown');
-            $('#newCustomerFC').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
-                $('#newCustomerFC').removeClass('animated fadeOutDown');
-                $('#newCustomerFC').addClass('animated fadeInDown');
-            });
-            $('#newCustomerFC').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
-                $('#newCustomerFC').removeClass('animated fadeInDown');
-            });
-            refreshPostList();
-        }, function (response) {
-            //Second function handles error
-            console.log(":| " + response.data);
-            $('#newCustomerFC').addClass('animated shake');
-            $('#newCustomerFC').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
-                $('#newCustomerFC').removeClass('animated shake');
-            });
-        });
-    };
-
-
 });
 

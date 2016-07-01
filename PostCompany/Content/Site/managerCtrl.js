@@ -57,6 +57,10 @@ app.controller('managerCtrl', function ($scope, $http, $window) {
         }, function (response) {
             //Second function handles error
             console.log(":| " + response.data);
+            $('#newEmpFormContainer').addClass('animated shake');
+            $('#newEmpFormContainer').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+                $('#newEmpFormContainer').removeClass('animated shake');
+            });
         });
         $scope.newuser.Role = $scope.roleStr($scope.newuser.Role);
     };
@@ -84,18 +88,23 @@ app.controller('managerCtrl', function ($scope, $http, $window) {
             data: $scope.editProfileUser,
             headers: { 'Content-Type': 'application/json' }
         }).then(function (response) {
-            $('#EditProfileFormContainer').addClass('animated fadeOutDown');
-            $('#EditProfileFormContainer').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
-                $('#EditProfileFormContainer').removeClass('animated fadeOutDown');
-                $('#EditProfileFormContainer').addClass('animated fadeInDown');
+            $('#editFC').addClass('animated fadeOutDown');
+            $('#editFC').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+                $('#editFC').removeClass('animated fadeOutDown');
+                $('#editFC').addClass('animated fadeInDown');
             });
-            $('#EditProfileFormContainer').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
-                $('#EditProfileFormContainer').removeClass('animated fadeInDown');
+            $('#editFC').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+                $('#editFC').removeClass('animated fadeInDown');
             });
             location.reload(true);
         }, function (response) {
             //Second function handles error
             console.log(":| " + response.data);
+            $('#editFC').addClass('animated shake');
+            $('#editFC').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+                $('#editFC').removeClass('animated shake');
+            });
+
         });
     };
     $scope.EditEmp = function () {
@@ -117,6 +126,10 @@ app.controller('managerCtrl', function ($scope, $http, $window) {
         }, function (response) {
             //Second function handles error
             console.log(":| " + response.data);
+            $('#newEmpFormContainer').addClass('animated shake');
+            $('#newEmpFormContainer').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+                $('#newEmpFormContainer').removeClass('animated shake');
+            });
         });
     };
     Editpost = function (item) {

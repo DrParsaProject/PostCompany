@@ -17,5 +17,10 @@ namespace PostCompany.Controllers
             Authentication.LogOut();
             return Request.CreateResponse(HttpStatusCode.OK);
         }
+        public HttpResponseMessage Get()
+        {
+            Authentication.LogOut();
+            return Request.CreateResponse(HttpStatusCode.OK);
+        }
     }
 }
