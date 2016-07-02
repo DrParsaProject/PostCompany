@@ -46,7 +46,9 @@ app.controller('transportCtrl', function ($scope, $http, $window) {
 
     $scope.submitEditPost = function () {
         console.log("asdfasdfasdfasdfasdf");
+        console.log($scope.editPost);
         $scope.editPost.Status = $scope.strStatus($scope.editPost.Status);
+        console.log($scope.editPost);
         $http({
             method: 'PUT',
             url: baseUrl + "Box/" + postID,

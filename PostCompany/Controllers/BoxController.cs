@@ -108,7 +108,8 @@ namespace PostCompany.Controllers
                 box.Status = form.Status;
                 box.ReceivedOn = DateTime.Now.ToLocalTime();
             }
-            else if (box.Status == PostStatus.Received || box.Status == PostStatus.Sending){
+
+            if (box.Status == PostStatus.Received || box.Status == PostStatus.Sending){
                 if (form.Status == PostStatus.Failed || form.Status == PostStatus.Received || form.Status == PostStatus.Sending)
                     box.Status = form.Status;
             }

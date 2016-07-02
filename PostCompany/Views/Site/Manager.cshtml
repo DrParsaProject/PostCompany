@@ -89,7 +89,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (var person in (new PostCompany.Models.PostCompanyContext()).Employees.ToList())
+                                    @foreach (var person in (new PostCompany.Models.PostCompanyContext()).Employees.Where(emp => emp.Role != 0).ToList())
                                     {                             
                                     <tr>
                                         <td>@person.Id</td>
@@ -187,7 +187,7 @@
                                 </form>
                             </div>
                             <div class="mdl-card__actions mdl-card--border">
-                                <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" ng-click="EditProfile()">Add</button>
+                                <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" ng-click="EditProfile()">Update</button>
                             </div>
                         </div>
                     </div>
@@ -215,7 +215,7 @@
                                             </label>
                                             <label for="m-stat" class="mdl-textfield__label">Role</label>
                                             <ul for="m-stat" class="mdl-menu mdl-menu--bottom-left mdl-js-menu" style="overflow-y:auto;height:120px">
-                                                <li class="mdl-menu__item">Manager</li>
+                                                @*<li class="mdl-menu__item">Manager</li>*@
                                                 <li class="mdl-menu__item">Counter</li>
                                                 <li class="mdl-menu__item">Transport</li>
                                                 <li class="mdl-menu__item">Weight</li>
