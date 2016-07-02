@@ -99,7 +99,7 @@ namespace PostCompany.Controllers
 			Employee employee = new Employee();
 			employee.Username = form.Username;
 			employee.Password = Security.GetMd5Hash(form.Password);
-            employee.Name = form.Name;
+			employee.Name = form.Name;
 			employee.Role = form.Role;
 
             if (ModelState.IsValid)

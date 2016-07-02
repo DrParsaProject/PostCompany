@@ -168,6 +168,7 @@
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\EmployeeLoginController.cs" />
     <Compile Include="Controllers\LogOutController.cs" />
+    <Compile Include="CustomViewEngine.cs" />
     <Compile Include="InputForms\AddBoxIForm.cs" />
     <Compile Include="InputForms\EditBoxIForm.cs" />
     <Compile Include="InputForms\EditCustomerIForm.cs" />
@@ -197,10 +198,7 @@
     <Content Include="Content\Site\angular.min.js" />
     <Content Include="Content\Site\animate.css" />
     <Content Include="Content\Site\app.js" />
-    <Content Include="Content\Site\transportCtrl.js" />
-    <Content Include="Content\Site\weightCtrl.js" />
     <Content Include="Content\Site\css.css" />
-    <Content Include="Content\Site\counterCtrl.js" />
     <Content Include="Content\Site\managerCtrl.js" />
     <Content Include="Content\Site\getmdl-select.min.css" />
     <Content Include="Content\Site\getmdl-select.min.js" />

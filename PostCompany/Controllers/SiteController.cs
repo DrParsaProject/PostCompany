@@ -27,17 +27,6 @@ namespace PostCompany.Views.Site
         {
             return View();
         }
-        public ActionResult Counter()
-        {
-            return View();
-        }
-        public ActionResult Transport()
-        {
-            return View();
-        }
-        public ActionResult Weight()
-        {
-            return View();
-        }
+
     }
 }

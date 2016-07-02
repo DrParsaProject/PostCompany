@@ -23,7 +23,9 @@ namespace PostCompany
 			FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
 			RouteConfig.RegisterRoutes(RouteTable.Routes);
 			BundleConfig.RegisterBundles(BundleTable.Bundles);
-		}
+            ViewEngines.Engines.Clear();
+            ViewEngines.Engines.Add(new CustomViewEngine());
+        }
 
 		protected void Application_PostAuthorizeRequest()
 		{

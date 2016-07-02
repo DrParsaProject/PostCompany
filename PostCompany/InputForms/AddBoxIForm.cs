@@ -5,11 +5,11 @@ using System.Web;
 
 namespace PostCompany.InputForms
 {
-    public class AddBoxIForm
-    {
-        public string SenderUsername { get; set; }
-        public string ReceiverName { get; set; }
-        public string ReceiverCity { get; set; }
-        public string ReceiverAddress { get; set; }
-    }
+	public class AddBoxIForm
+	{
+		public int SenderId { get; set; }
+		public string ReceiverName { get; set; }
+		public string ReceiverCity { get; set; }
+		public string ReceiverAddress { get; set; }
+	}
 }
