@@ -6,6 +6,9 @@ using System.Web;
 
 namespace PostCompany.Reports
 {
+	/// <summary>
+	/// این کلاس فرم خروجی برای مشخصات کارمند است
+	/// </summary>
 	public class EmployeeProfileOForm
 	{
 		public int Id { get; set; }

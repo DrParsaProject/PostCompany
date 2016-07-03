@@ -15,10 +15,18 @@ using PostCompany.InputForms;
 
 namespace PostCompany.Controllers
 {
+	/// <summary>
+	/// این کلاس وظیفه کنترل ریکوست های مربوط به بسته های پستی را دارد
+	/// </summary>
     public class BoxController : ApiController
     {
         private PostCompanyContext db = new PostCompanyContext();
 
+		/// <summary>
+		/// این تابع لیست بسته های پستی را می دهد
+		/// در صورتی که مشتری این ریکوسا را بزند لیست بسته های مربوط
+		/// به همان مشتری نمایش داده می شود
+		/// </summary>
         // GET api/Box
 		public List<BoxOForm> GetBoxes()
 		{
@@ -40,6 +48,11 @@ namespace PostCompany.Controllers
 			return res;
 		}
 
+		/// <summary>
+		/// این تابع وظیفه تغییر در وضعیت بسته ها را دارد
+		/// هر یک از کارمندان و مشتری ها اجازه تغییر دادن بخشی
+		/// از بسته ها را با توجه به وظیفه مشخص شده آن ها در سیستم دارند
+		/// </summary>
         // PUT api/Box/5
         public HttpResponseMessage PutBox(int id, EditBoxIForm form)
 		{
@@ -127,18 +140,28 @@ namespace PostCompany.Controllers
 					box.Status = form.Status;
 		}
 
+		/// <summary>
+		/// این تابع برای ایجاد یک بسته ی پستی جدید است
+		/// فقط کارمند باجه اجازه استفاده از آن را دارد
+		/// </summary>
         // POST api/Box
         public HttpResponseMessage PostBox(AddBoxIForm form)
         {
 			if (!Authorize.hasRole(EmployeeRole.Counter))
 				throw new HttpResponseException(HttpStatusCode.Forbidden);
 
-			if (form.SenderId <= 0 || form.ReceiverName == null ||
+			int senderId = (from c in db.Customers
+							where c.Username == form.SenderUsername
+							select c.Id).SingleOrDefault();
+
+			if (senderId <= 0 || form.ReceiverName == null ||
 				form.ReceiverCity == null || form.ReceiverAddress == null)
 				throw new HttpResponseException(HttpStatusCode.BadRequest);
 
+
+
 			Box box = new Box();
-			box.SenderId = form.SenderId;
+			box.SenderId = senderId;
 			box.ReceiverName = form.ReceiverName;
 			box.ReceiverCity = form.ReceiverCity;
 			box.ReceiverAddress = form.ReceiverAddress;

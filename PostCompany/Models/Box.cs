@@ -6,6 +6,9 @@ using System.Web;
 
 namespace PostCompany.Models
 {
+	/// <summary>
+	/// این کلاس مدل دیتابیس برای بسته پستی است
+	/// </summary>
 	public class Box
 	{
 		public int Id { get; set; }
@@ -27,6 +30,9 @@ namespace PostCompany.Models
 		public PostStatus Status { get; set; }
 	}
 
+	/// <summary>
+	/// وضعیت یک بسته ی پستی را معین می کند
+	/// </summary>
 	public enum PostStatus
 	{
 		NotPaid,

@@ -15,10 +15,17 @@ using PostCompany.Reports;
 
 namespace PostCompany.Controllers
 {
+	/// <summary>
+	/// این کلاس برای انجام کارهای مربوط به کارمندان شرکت است
+	/// </summary>
     public class EmployeeController : ApiController
     {
         private PostCompanyContext db = new PostCompanyContext();
 
+		/// <summary>
+		/// این تابع لیست کارمندان سیستم را می دهد
+		/// فقط مدیر اجازه استفاده از این ریکوست را دارد
+		/// </summary>
         // GET api/Employee
 		public List<EmployeeProfileOForm> GetEmployees()
 		{
@@ -33,6 +40,10 @@ namespace PostCompany.Controllers
 			return res;
         }
 
+
+		/// <summary>
+		/// این تابع مشخصات یک کارمند خاص را می دهد
+		/// </summary>
         // GET api/Employee/5
         public EmployeeProfileOForm GetEmployee(int id)
 		{
@@ -46,6 +57,11 @@ namespace PostCompany.Controllers
 			return new EmployeeProfileOForm(employee);
         }
 
+		/// <summary>
+		/// این تابع مشخصات یک کارمند مثل پسورد یا نقش آن کارمند را تغییر می دهد
+		/// مدیر و خود کارمند اجازه استفاده از آن را دارند
+		/// فقط مدیر می تواند نقش کارمندان را تغییر دهد
+		/// </summary>
         // PUT api/Employee/5
         public HttpResponseMessage PutEmployee(int id, EditEmployeeIForm form)
 		{
@@ -87,6 +103,10 @@ namespace PostCompany.Controllers
 			return Request.CreateResponse(HttpStatusCode.OK);
         }
 
+		/// <summary>
+		/// با این ریکوست مدیر می تواند یک کارمند جدید به سیستم اضافه کند
+		/// و نقش و وظیفه او را مشخص کند
+		/// </summary>
         // POST api/Employee
         public HttpResponseMessage PostEmployee(RegisterEmployeeIForm form)
         {
@@ -116,6 +136,10 @@ namespace PostCompany.Controllers
             }
         }
 
+		/// <summary>
+		/// به کمک این تابع مدیر سیستم می تواند کارمند را از سیستم حذف کند
+		/// که به منزله اخراج کارمند از شرکت است
+		/// </summary>
         // DELETE api/Employee/5
         public HttpResponseMessage DeleteEmployee(int id)
 		{

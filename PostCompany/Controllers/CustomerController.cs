@@ -15,10 +15,16 @@ using PostCompany.InputForms;
 
 namespace PostCompany.Controllers
 {
+	/// <summary>
+	/// این کلاس وظیفه انجام کار های مربوط به مشتری را بر عهده دارد
+	/// </summary>
     public class CustomerController : ApiController
     {
         private PostCompanyContext db = new PostCompanyContext();
 
+		/// <summary>
+		/// این تابع مشخصات یک مشتری خاص سیستم را بر می گرداند
+		/// </summary>
         // GET api/Customer/5
 		public CustomerProfileOForm GetCustomer(int id)
 		{
@@ -32,6 +38,9 @@ namespace PostCompany.Controllers
 			return new CustomerProfileOForm(customer);
 		}
 
+		/// <summary>
+		/// این تابع وظیفه تغییر مشخصات یک مشتری را بر عهده دارد
+		/// </summary>
 		// PUT api/Customer/5
 		public HttpResponseMessage PutCustomer(int id, EditCustomerIForm form)
 		{
@@ -72,6 +81,10 @@ namespace PostCompany.Controllers
 			return Request.CreateResponse(HttpStatusCode.OK);
 		}
 
+		/// <summary>
+		/// این تابع یک مشتری جدید را به سیستم اضافه می کند
+		/// فقط کارمند باجه اجازه انجام این کار را دارد
+		/// </summary>
 		// POST api/Customer
 		public HttpResponseMessage PostCustomer(RegisterCustomerIForm form)
 		{

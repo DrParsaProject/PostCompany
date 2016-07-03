@@ -6,6 +6,10 @@ using System.Web.Mvc;
 
 namespace PostCompany.Views.Site
 {
+	/// <summary>
+	/// این کلاس صفحات مختلف را به توجه به 
+	/// کاربری که ورود کرده به سیستم نمایش می دهد
+	/// </summary>
     public class SiteController : Controller
     {
         //

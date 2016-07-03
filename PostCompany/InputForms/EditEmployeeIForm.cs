@@ -6,6 +6,9 @@ using System.Web;
 
 namespace PostCompany.Forms
 {
+	/// <summary>
+	/// این کلاس فرم ورودی برای تغییر مشخصات کارمند سسیستم است
+	/// </summary>
 	public class EditEmployeeIForm
 	{
 		public string OldPassword { get; set; }

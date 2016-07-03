@@ -6,6 +6,9 @@ using System.Web;
 
 namespace PostCompany.InputForms
 {
+	/// <summary>
+	/// این کلاس فرم ورودی برای تغییر مشخصات یک بسته پستی است
+	/// </summary>
 	public class EditBoxIForm
 	{
 		public string ReceiverName { get; set; }

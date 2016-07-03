@@ -11,6 +11,9 @@ namespace PostCompany.Controllers
     public class LogOutController : ApiController
     {
         
+		/// <summary>
+		/// این ریکوست برای خروج از سیستم است
+		/// </summary>
         // POST api/logout
         public HttpResponseMessage Post()
         {

@@ -6,6 +6,9 @@ using System.Web;
 
 namespace PostCompany.OutputForms
 {
+	/// <summary>
+	/// این کلاس فرم خروجی برای بسته پستی است
+	/// </summary>
 	public class BoxOForm
 	{
 		public int Id { get; set; }

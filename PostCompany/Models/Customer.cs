@@ -5,6 +5,9 @@ using System.Web;
 
 namespace PostCompany.Models
 {
+	/// <summary>
+	/// این کلاس مدل دیتابیس برای مشتری است
+	/// </summary>
 	public class Customer
 	{
 		public int Id { get; set; }

@@ -7,10 +7,16 @@ using System.Web;
 
 namespace PostCompany.Utils
 {
+	/// <summary>
+	/// این کلاس توابعی را برای امنیت پسورد ها در اختیار می گذارد
+	/// </summary>
 	public class Security
 	{
 		static private MD5 md5Hash = MD5.Create();
 
+		/// <summary>
+		/// این تابع پسورد داده شده کاربر را هش می کند
+		/// </summary>
 		public static string GetMd5Hash(string input)
 		{
 
@@ -32,7 +38,9 @@ namespace PostCompany.Utils
 			return sBuilder.ToString();
 		}
 
-		// Verify a hash against a string.
+		/// <summary>
+		/// این تابع یک پسورد داده شده را با پسورد هش شده موجود در سیستم مقایسه می کند
+		/// </summary>
 		public static bool VerifyMd5Hash(string input, string hash)
 		{
 			// Hash the input.

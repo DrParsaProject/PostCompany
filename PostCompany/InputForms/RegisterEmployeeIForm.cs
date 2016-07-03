@@ -6,6 +6,9 @@ using System.Web;
 
 namespace PostCompany.Forms
 {
+	/// <summary>
+	/// این کلاس فرم ورودی برای اضافه کردن کارمند جدید به سیستم است
+	/// </summary>
 	public class RegisterEmployeeIForm
 	{
 		public string Username { get; set; }

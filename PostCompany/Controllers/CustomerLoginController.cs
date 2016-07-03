@@ -15,10 +15,17 @@ using PostCompany.OutputForms;
 
 namespace PostCompany.Controllers
 {
+	/// <summary>
+	/// این کلاس برای ورود به سیستم مشتریان است
+	/// </summary>
     public class CustomerLoginController : ApiController
     {
         private PostCompanyContext db = new PostCompanyContext();
 
+		/// <summary>
+		/// این تابع با گرفتن یوزرنیم و پسورد یک مشتری
+		/// ورود به سیستم را برای آن انجام میدهد
+		/// </summary>
         // POST api/CustomerLogin
         public LoginOForm PostCustomerLogin(LoginIForm form)
         {

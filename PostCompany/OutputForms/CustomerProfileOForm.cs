@@ -6,6 +6,9 @@ using System.Web;
 
 namespace PostCompany.OutputForms
 {
+	/// <summary>
+	/// این کلاس فرم خروجی برای مشخصات شخصی مشتری است
+	/// </summary>
 	public class CustomerProfileOForm
 	{
 		public int Id { get; set; }

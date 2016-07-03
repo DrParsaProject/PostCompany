@@ -16,10 +16,16 @@ using PostCompany.OutputForms;
 
 namespace PostCompany.Controllers
 {
+	/// <summary>
+	/// این کلاس وظیفه ورود به سیستم برای کارمندان شرکت را بر عهده دارد
+	/// </summary>
     public class EmployeeLoginController : ApiController
     {
         private PostCompanyContext db = new PostCompanyContext();
 
+		/// <summary>
+		/// این تابع با گرفتن یوزرنیم و پسورد کارمند او را به سیستم وارد می کند
+		/// </summary>
         // POST api/EmployeeLogin
         public LoginOForm PostEmployeeLogin(LoginIForm form)
         {
